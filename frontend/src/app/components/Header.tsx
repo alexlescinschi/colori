@@ -81,13 +81,6 @@ export default function Header() {
           </nav>
 
           <div suppressHydrationWarning className="flex items-center gap-3 md:gap-4">
-            <Link href="/search" className="icon-link" aria-label="Cauta">
-              <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor">
-                <circle cx="11" cy="11" r="6.5" strokeWidth="1.7" />
-                <path d="m16 16 4 4" strokeWidth="1.7" strokeLinecap="round" />
-              </svg>
-            </Link>
-
             <Link href="/account" className="icon-link" aria-label="Contul meu">
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor">
                 <circle cx="12" cy="8" r="4" strokeWidth="1.6" />
@@ -111,32 +104,32 @@ export default function Header() {
           </div>
         </div>
       </div>
-
-      {menuOpen && (
-        <div className="fixed inset-0 z-40 md:hidden">
-          <div className="absolute inset-0 bg-black/60" onClick={() => setMenuOpen(false)} />
-          <div className="absolute left-0 top-0 h-full w-72 border-r border-zinc-800 bg-[#09090c] p-6 pt-24">
-            <nav className="flex flex-col gap-2">
-              {[
-                { href: "/", label: "Acasă" },
-                { href: "/search", label: "Produse" },
-                { href: "/despre-noi", label: "Despre noi" },
-                { href: "/academie", label: "Academie" },
-                { href: "/contacte", label: "Contacte" },
-              ].map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="border-b border-zinc-800 py-3 text-sm uppercase tracking-[0.12em] text-zinc-200 transition hover:text-white"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
-        </div>
-      )}
     </header>
+
+    {menuOpen && (
+      <div className="fixed inset-0 z-[60] md:hidden">
+        <div className="absolute inset-0 bg-black/60" onClick={() => setMenuOpen(false)} />
+        <div className="absolute left-0 top-0 h-full w-72 border-r border-zinc-800 bg-[#09090c] p-6 pt-24">
+          <nav className="flex flex-col gap-2">
+            {[
+              { href: "/", label: "Acasă" },
+              { href: "/search", label: "Produse" },
+              { href: "/despre-noi", label: "Despre noi" },
+              { href: "/academie", label: "Academie" },
+              { href: "/contacte", label: "Contacte" },
+            ].map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className="border-b border-zinc-800 py-3 text-sm uppercase tracking-[0.12em] text-zinc-200 transition hover:text-white"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </div>
+    )}
   );
 }
