@@ -15,6 +15,7 @@ function getCartCountFromStorage() {
 }
 
 export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [cartCount, setCartCount] = useState(() => getCartCountFromStorage());
   const [wishlistCount, setWishlistCount] = useState(() => getWishlistCountSync());
 
@@ -52,12 +53,19 @@ export default function Header() {
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <button
             type="button"
+            onClick={() => setMenuOpen(!menuOpen)}
             className="md:hidden inline-flex h-10 w-10 items-center justify-center border border-zinc-700"
             aria-label="Meniu"
           >
-            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7" d="M4 7h16M4 12h16M4 17h16" />
-            </svg>
+            {menuOpen ? (
+              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor">
+                <path strokeLinecap="round" strokeWidth="1.7" d="M6 6l12 12M18 6l-12 12" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7" d="M4 7h16M4 12h16M4 17h16" />
+              </svg>
+            )}
           </button>
 
           <Link href="/" className="brand-serif text-3xl tracking-[0.35em] md:text-4xl">
@@ -103,6 +111,32 @@ export default function Header() {
           </div>
         </div>
       </div>
+
+      {menuOpen && (
+        <div className="fixed inset-0 z-40 md:hidden">
+          <div className="absolute inset-0 bg-black/60" onClick={() => setMenuOpen(false)} />
+          <div className="absolute left-0 top-0 h-full w-72 border-r border-zinc-800 bg-[#09090c] p-6 pt-24">
+            <nav className="flex flex-col gap-2">
+              {[
+                { href: "/", label: "Acasă" },
+                { href: "/search", label: "Produse" },
+                { href: "/despre-noi", label: "Despre noi" },
+                { href: "/academie", label: "Academie" },
+                { href: "/contacte", label: "Contacte" },
+              ].map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="border-b border-zinc-800 py-3 text-sm uppercase tracking-[0.12em] text-zinc-200 transition hover:text-white"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
