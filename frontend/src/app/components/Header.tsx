@@ -65,8 +65,11 @@ export default function Header() {
           </Link>
 
           <nav className="hidden items-center gap-8 text-sm tracking-[0.12em] uppercase md:flex">
-            <Link href="/" className="hover:text-zinc-300 transition">Acasa</Link>
-            <Link href="/search" className="hover:text-zinc-300 transition">Produse</Link>
+            <Link href="/" className="transition hover:text-zinc-300">Acasă</Link>
+            <Link href="/search" className="transition hover:text-zinc-300">Produse</Link>
+            <Link href="/despre-noi" className="transition hover:text-zinc-300">Despre noi</Link>
+            <Link href="/academie" className="transition hover:text-zinc-300">Academie</Link>
+            <Link href="/contacte" className="transition hover:text-zinc-300">Contacte</Link>
           </nav>
 
           <div suppressHydrationWarning className="flex items-center gap-3 md:gap-4">
