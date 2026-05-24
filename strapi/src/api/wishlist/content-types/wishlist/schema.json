@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "wishlists",
+  "info": {
+    "singularName": "wishlist",
+    "pluralName": "wishlists",
+    "displayName": "Wishlist"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "userId": {
+      "type": "integer",
+      "required": true
+    },
+    "productId": {
+      "type": "integer",
+      "required": true
+    }
+  }
+}
