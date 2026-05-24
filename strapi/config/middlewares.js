@@ -1,6 +1,4 @@
-import type { Core } from '@strapi/strapi';
-
-const config: Core.Config.Middlewares = [
+const config = [
   'strapi::logger',
   'strapi::errors',
   'strapi::security',
