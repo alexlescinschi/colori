@@ -44,6 +44,7 @@ export default function Header() {
   }, []);
 
   return (
+    <>
     <header className="sticky top-0 z-50">
       <div className="bg-[#5e000e] px-4 py-2 text-center text-xs tracking-[0.12em] text-white uppercase md:text-sm">
         Livrare gratuita pentru comenzi peste 299 MDL
@@ -131,5 +132,6 @@ export default function Header() {
         </div>
       </div>
     )}
+    </>
   );
 }
