@@ -10,22 +10,19 @@ interface CheckoutForm {
   customerPhone: string;
   customerAddress: string;
   customerCity: string;
-  paymentMethod: "cash" | "card_offline" | "transfer";
+  paymentMethod: "cash" | "transfer";
 }
 
 const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
 
-function createOrderNumber() {
+function generateOrderNumber() {
   return `CL-${Date.now().toString().slice(-6)}-${Math.floor(Math.random() * 900 + 100)}`;
 }
 
 export default function CheckoutPage() {
   const router = useRouter();
   const [cart] = useState<CartItem[]>(() => {
-    if (typeof window === "undefined") {
-      return [];
-    }
-
+    if (typeof window === "undefined") return [];
     return JSON.parse(localStorage.getItem("cart") || "[]") as CartItem[];
   });
   const [loading, setLoading] = useState(false);
@@ -45,6 +42,10 @@ export default function CheckoutPage() {
     }
   }, [cart.length, router]);
 
+  if (cart.length === 0) {
+    return <div className="mx-auto max-w-7xl px-4 py-8 text-zinc-400">Se încarcă...</div>;
+  }
+
   const total = cart.reduce((sum, item) => sum + item.priceSnapshot * item.quantity, 0);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -52,14 +53,12 @@ export default function CheckoutPage() {
     setLoading(true);
     setError("");
 
-    // Validate
     if (!form.customerName || !form.customerEmail || !form.customerPhone || !form.customerAddress) {
       setError("Completează toate câmpurile obligatorii");
       setLoading(false);
       return;
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(form.customerEmail)) {
       setError("Adresa de email nu este validă");
@@ -67,7 +66,6 @@ export default function CheckoutPage() {
       return;
     }
 
-    // Phone validation (basic)
     if (form.customerPhone.length < 8) {
       setError("Numărul de telefon nu este valid");
       setLoading(false);
@@ -75,13 +73,11 @@ export default function CheckoutPage() {
     }
 
     try {
-      const orderNumber = createOrderNumber();
+      const orderNumber = generateOrderNumber();
 
       const response = await fetch(`${STRAPI_URL}/api/orders`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           data: {
             orderNumber,
@@ -106,11 +102,9 @@ export default function CheckoutPage() {
         throw new Error(data?.error?.message || raw || "Eroare la plasarea comenzii");
       }
 
-      // Clear cart
       localStorage.removeItem("cart");
       window.dispatchEvent(new Event("cartUpdated"));
 
-      // Redirect to confirmation
       router.push(`/order-confirmation?order=${data?.data?.orderNumber || orderNumber}`);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Eroare la plasarea comenzii");
@@ -119,123 +113,119 @@ export default function CheckoutPage() {
     }
   };
 
-  if (cart.length === 0) {
-    return <div className="max-w-7xl mx-auto px-4 py-8">Se încarcă...</div>;
-  }
+  const inputClass = "w-full border border-zinc-700 bg-black px-4 py-3 text-sm text-white placeholder-zinc-500 transition focus:border-[#5e000e] focus:outline-none";
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Finalizează comanda</h1>
+    <div className="bg-[#09090c] text-white">
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        <h1 className="brand-serif mb-10 text-3xl tracking-[0.12em] text-white">Finalizează comanda</h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Form */}
-        <div>
-          <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          <form onSubmit={handleSubmit} className="space-y-5">
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+              <div className="border border-red-800 bg-red-900/30 px-4 py-3 text-sm text-red-300">
                 {error}
               </div>
             )}
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="mb-1 block text-xs uppercase tracking-wider text-zinc-400">
                 Nume și prenume *
               </label>
               <input
                 type="text"
                 value={form.customerName}
                 onChange={(e) => setForm({ ...form, customerName: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5e000e] focus:border-transparent"
+                className={inputClass}
+                placeholder="Ex: Ion Popescu"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="mb-1 block text-xs uppercase tracking-wider text-zinc-400">
                 Email *
               </label>
               <input
                 type="email"
                 value={form.customerEmail}
                 onChange={(e) => setForm({ ...form, customerEmail: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5e000e] focus:border-transparent"
+                className={inputClass}
+                placeholder="exemplu@email.com"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="mb-1 block text-xs uppercase tracking-wider text-zinc-400">
                 Telefon *
               </label>
               <input
                 type="tel"
                 value={form.customerPhone}
                 onChange={(e) => setForm({ ...form, customerPhone: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5e000e] focus:border-transparent"
+                className={inputClass}
+                placeholder="+373 69 123 456"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="mb-1 block text-xs uppercase tracking-wider text-zinc-400">
                 Adresă de livrare *
               </label>
               <input
                 type="text"
                 value={form.customerAddress}
                 onChange={(e) => setForm({ ...form, customerAddress: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5e000e] focus:border-transparent"
+                className={inputClass}
+                placeholder="Strada, număr, bloc, apartament"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="mb-1 block text-xs uppercase tracking-wider text-zinc-400">
                 Oraș *
               </label>
               <input
                 type="text"
                 value={form.customerCity}
                 onChange={(e) => setForm({ ...form, customerCity: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5e000e] focus:border-transparent"
+                className={inputClass}
+                placeholder="Chișinău"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="mb-3 block text-xs uppercase tracking-wider text-zinc-400">
                 Metodă de plată
               </label>
               <div className="space-y-2">
-                <label className="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                <label className="flex cursor-pointer items-center gap-3 border border-zinc-700 bg-black p-3 text-sm text-zinc-200 transition hover:border-zinc-500">
                   <input
                     type="radio"
                     name="payment"
                     value="cash"
                     checked={form.paymentMethod === "cash"}
                     onChange={(e) =>
-                      setForm({
-                        ...form,
-                        paymentMethod: e.target.value as CheckoutForm["paymentMethod"],
-                      })
+                      setForm({ ...form, paymentMethod: e.target.value as CheckoutForm["paymentMethod"] })
                     }
-                    className="text-[#5e000e]"
+                    className="accent-[#5e000e]"
                   />
                   <span>Plată la livrare (cash)</span>
                 </label>
-                <label className="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                <label className="flex cursor-pointer items-center gap-3 border border-zinc-700 bg-black p-3 text-sm text-zinc-200 transition hover:border-zinc-500">
                   <input
                     type="radio"
                     name="payment"
                     value="transfer"
                     checked={form.paymentMethod === "transfer"}
                     onChange={(e) =>
-                      setForm({
-                        ...form,
-                        paymentMethod: e.target.value as CheckoutForm["paymentMethod"],
-                      })
+                      setForm({ ...form, paymentMethod: e.target.value as CheckoutForm["paymentMethod"] })
                     }
-                    className="text-[#5e000e]"
+                    className="accent-[#5e000e]"
                   />
                   <span>Transfer bancar</span>
                 </label>
@@ -245,34 +235,32 @@ export default function CheckoutPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#5e000e] text-white py-3 rounded-lg font-semibold hover:bg-[#4a000b] transition disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-[#5e000e] px-6 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-[#7e1023] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading ? "Se procesează..." : `Plasează comanda (${total.toFixed(2)} MDL)`}
             </button>
           </form>
-        </div>
 
-        {/* Order Summary */}
-        <div className="bg-gray-50 p-6 rounded-lg h-fit">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Sumar comandă</h2>
-          
-          <div className="space-y-3 mb-4">
-            {cart.map((item) => (
-              <div key={item.productId} className="flex justify-between">
-                <span>
-                  {item.titleSnapshot} x {item.quantity}
-                </span>
-                <span className="font-medium">
-                  {(item.priceSnapshot * item.quantity).toFixed(2)} MDL
-                </span>
+          <div className="h-fit border border-zinc-800 bg-[#121216] p-6">
+            <h2 className="brand-serif mb-6 text-xl tracking-[0.1em] text-white">Sumar comandă</h2>
+
+            <div className="space-y-3">
+              {cart.map((item) => (
+                <div key={item.productId} className="flex justify-between text-sm text-zinc-300">
+                  <span>
+                    {item.titleSnapshot}{" "}
+                    <span className="text-zinc-500">x{item.quantity}</span>
+                  </span>
+                  <span>{(item.priceSnapshot * item.quantity).toFixed(2)} MDL</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="my-6 border-t border-zinc-800 pt-6">
+              <div className="flex justify-between text-lg font-bold text-white">
+                <span>Total</span>
+                <span className="text-[#5e000e]">{total.toFixed(2)} MDL</span>
               </div>
-            ))}
-          </div>
-
-          <div className="border-t pt-4">
-            <div className="flex justify-between text-lg font-bold">
-              <span>Total</span>
-              <span className="text-[#5e000e]">{total.toFixed(2)} MDL</span>
             </div>
           </div>
         </div>
