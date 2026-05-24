@@ -1,4 +1,4 @@
-import path from 'path';
+const path = require('path');
 
 const config = ({ env }) => {
   const client = env('DATABASE_CLIENT', 'sqlite');
@@ -59,4 +59,4 @@ const config = ({ env }) => {
   };
 };
 
-export default config;
+module.exports = config;

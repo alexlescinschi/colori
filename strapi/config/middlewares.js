@@ -1,4 +1,4 @@
-const config = [
+module.exports = [
   'strapi::logger',
   'strapi::errors',
   'strapi::security',
@@ -10,5 +10,3 @@ const config = [
   'strapi::favicon',
   'strapi::public',
 ];
-
-export default config;
