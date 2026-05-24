@@ -1,0 +1,31 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+
+env:
+  VPS_IP: ${{ secrets.VPS_HOST }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Replace VPS_IP placeholder with real IP
+        run: |
+          sed -i "s/VPS_IP/${{ secrets.VPS_HOST }}/g" docker-compose.yml
+          sed -i "s/VPS_IP/${{ secrets.VPS_HOST }}/g" scripts/setup-server.sh
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd ~/colori-md
+            git pull origin main
+            docker compose up -d --build
+            docker system prune -f
