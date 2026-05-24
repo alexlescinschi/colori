@@ -161,12 +161,34 @@ export default async function Home({
         </div>
       </section>
 
-      <section className="border-b border-zinc-800 bg-[#0a0a0f] py-4">
-        <div className="mx-auto grid max-w-7xl gap-4 px-4 text-xs uppercase tracking-[0.16em] text-zinc-300 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
-          <p>Calitate profesionala</p>
-          <p>Testate pe cliente reale</p>
-          <p>Create de profesionisti</p>
-          <p>Plati 100% securizate</p>
+      <section className="border-b border-zinc-800 bg-[#0a0a0f] py-6">
+        <div className="mx-auto grid max-w-7xl gap-4 px-4 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
+          <div className="flex items-center gap-3">
+            <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-[#5e000e]" fill="none" stroke="currentColor">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span className="text-xs uppercase tracking-[0.16em] text-zinc-300">Calitate profesională</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-[#5e000e]" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10" strokeWidth="1.5" />
+              <path d="m8 12 3 3 5-5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span className="text-xs uppercase tracking-[0.16em] text-zinc-300">Testate pe cliente reale</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-[#5e000e]" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <span className="text-xs uppercase tracking-[0.16em] text-zinc-300">Create de profesioniști</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-[#5e000e]" fill="none" stroke="currentColor">
+              <rect x="3" y="11" width="18" height="10" rx="2" strokeWidth="1.5" />
+              <path d="M8 11V7a4 4 0 0 1 8 0v4" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+            <span className="text-xs uppercase tracking-[0.16em] text-zinc-300">Plăți 100% securizate</span>
+          </div>
         </div>
       </section>
 

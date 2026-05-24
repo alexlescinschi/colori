@@ -55,7 +55,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden inline-flex h-10 w-10 items-center justify-center border border-zinc-700"
+            className="md:hidden inline-flex items-center justify-center p-1"
             aria-label="Meniu"
           >
             {menuOpen ? (
@@ -69,7 +69,7 @@ export default function Header() {
             )}
           </button>
 
-          <Link href="/" className="brand-serif text-3xl tracking-[0.35em] md:text-4xl">
+          <Link href="/" className="brand-serif ml-2 text-3xl tracking-[0.35em] md:ml-0 md:text-4xl">
             COLORI
           </Link>
 
