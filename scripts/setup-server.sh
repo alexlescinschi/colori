@@ -19,6 +19,23 @@ if [ ! -d ~/colori-md ]; then
 fi
 cd ~/colori-md
 
+echo "==> Generating Strapi .env..."
+if [ ! -f strapi/.env ]; then
+  cat > strapi/.env <<EOF
+HOST=0.0.0.0
+PORT=1337
+APP_KEYS=$(openssl rand -base64 32),$(openssl rand -base64 32),$(openssl rand -base64 32),$(openssl rand -base64 32)
+API_TOKEN_SALT=$(openssl rand -base64 32)
+ADMIN_JWT_SECRET=$(openssl rand -base64 32)
+TRANSFER_TOKEN_SALT=$(openssl rand -base64 32)
+ENCRYPTION_KEY=$(openssl rand -base64 32)
+JWT_SECRET=$(openssl rand -base64 32)
+DATABASE_CLIENT=sqlite
+DATABASE_FILENAME=.tmp/data.db
+EOF
+  echo "  -> Generated strapi/.env with random keys"
+fi
+
 echo "==> Replacing VPS_IP placeholder..."
 sed -i "s/VPS_IP/$VPS_IP/g" docker-compose.yml
 
