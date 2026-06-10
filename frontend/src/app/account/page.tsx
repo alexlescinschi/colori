@@ -76,7 +76,7 @@ export default function AccountPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-      <h1 className="brand-serif text-4xl tracking-[0.12em] text-white">Contul meu</h1>
+      <h1 className="brand-serif text-4xl tracking-[0.12em] text-[#1A1A1A]">Contul meu</h1>
 
       {!user ? (
         <div className="mt-8 grid gap-6 lg:grid-cols-2">
@@ -85,20 +85,20 @@ export default function AccountPage() {
               <button
                 type="button"
                 onClick={() => setMode("login")}
-                className={`px-4 py-2 ${mode === "login" ? "bg-[#5e000e] text-white" : "border border-zinc-700 text-zinc-300"}`}
+                className={`px-4 py-2 ${mode === "login" ? "bg-[#5e000e] text-white" : "border border-zinc-300 text-zinc-600"}`}
               >
                 Login
               </button>
               <button
                 type="button"
                 onClick={() => setMode("register")}
-                className={`px-4 py-2 ${mode === "register" ? "bg-[#5e000e] text-white" : "border border-zinc-700 text-zinc-300"}`}
+                className={`px-4 py-2 ${mode === "register" ? "bg-[#5e000e] text-white" : "border border-zinc-300 text-zinc-600"}`}
               >
                 Register
               </button>
             </div>
 
-            {error ? <p className="mb-4 text-sm text-red-300">{error}</p> : null}
+            {error ? <p className="mb-4 text-sm text-red-600">{error}</p> : null}
 
             {mode === "login" ? (
               <form onSubmit={onLogin} className="space-y-4">
@@ -106,7 +106,7 @@ export default function AccountPage() {
                   value={loginIdentifier}
                   onChange={(event) => setLoginIdentifier(event.target.value)}
                   placeholder="Email sau username"
-                  className="w-full border border-zinc-700 bg-black px-4 py-3 text-sm text-white"
+                  className="w-full border border-zinc-300 bg-[#F8F4F3] px-4 py-3 text-sm text-[#1A1A1A]"
                   required
                 />
                 <input
@@ -114,7 +114,7 @@ export default function AccountPage() {
                   value={loginPassword}
                   onChange={(event) => setLoginPassword(event.target.value)}
                   placeholder="Parola"
-                  className="w-full border border-zinc-700 bg-black px-4 py-3 text-sm text-white"
+                  className="w-full border border-zinc-300 bg-[#F8F4F3] px-4 py-3 text-sm text-[#1A1A1A]"
                   required
                 />
                 <button
@@ -131,7 +131,7 @@ export default function AccountPage() {
                   value={regName}
                   onChange={(event) => setRegName(event.target.value)}
                   placeholder="Username"
-                  className="w-full border border-zinc-700 bg-black px-4 py-3 text-sm text-white"
+                  className="w-full border border-zinc-300 bg-[#F8F4F3] px-4 py-3 text-sm text-[#1A1A1A]"
                   required
                 />
                 <input
@@ -139,7 +139,7 @@ export default function AccountPage() {
                   value={regEmail}
                   onChange={(event) => setRegEmail(event.target.value)}
                   placeholder="Email"
-                  className="w-full border border-zinc-700 bg-black px-4 py-3 text-sm text-white"
+                  className="w-full border border-zinc-300 bg-[#F8F4F3] px-4 py-3 text-sm text-[#1A1A1A]"
                   required
                 />
                 <input
@@ -147,7 +147,7 @@ export default function AccountPage() {
                   value={regPassword}
                   onChange={(event) => setRegPassword(event.target.value)}
                   placeholder="Parola"
-                  className="w-full border border-zinc-700 bg-black px-4 py-3 text-sm text-white"
+                  className="w-full border border-zinc-300 bg-[#F8F4F3] px-4 py-3 text-sm text-[#1A1A1A]"
                   required
                 />
                 <button
@@ -161,7 +161,7 @@ export default function AccountPage() {
             )}
           </section>
 
-          <section className="panel-surface p-6 text-sm text-zinc-300">
+          <section className="panel-surface p-6 text-sm text-zinc-600">
             Autentificarea iti activeaza wishlist server-side. Produsele favorite raman salvate pe contul tau.
           </section>
         </div>
@@ -169,18 +169,18 @@ export default function AccountPage() {
         <div className="mt-8 grid gap-6 lg:grid-cols-[320px_1fr]">
           <aside className="panel-surface p-6">
             <p className="text-xs uppercase tracking-[0.14em] text-zinc-400">Conectat ca</p>
-            <p className="mt-2 text-lg text-white">{user.email}</p>
+            <p className="mt-2 text-lg text-[#1A1A1A]">{user.email}</p>
             <button
               type="button"
               onClick={onLogout}
-              className="mt-6 border border-zinc-700 px-4 py-2 text-xs uppercase tracking-[0.13em] text-zinc-200 transition hover:border-zinc-500"
+              className="mt-6 border border-zinc-300 px-4 py-2 text-xs uppercase tracking-[0.13em] text-zinc-700 transition hover:border-[#5e000e] hover:text-[#5e000e]"
             >
               Logout
             </button>
           </aside>
 
           <section className="panel-surface p-6">
-            <h2 className="brand-serif text-2xl tracking-[0.1em] text-white">Wishlist (server)</h2>
+            <h2 className="brand-serif text-2xl tracking-[0.1em] text-[#1A1A1A]">Wishlist (server)</h2>
             {wishlist.length === 0 ? (
               <p className="mt-4 text-zinc-400">Nu ai produse favorite pe cont.</p>
             ) : (
@@ -189,9 +189,9 @@ export default function AccountPage() {
                   <Link
                     key={item.productId}
                     href={item.categorySlug ? getProductPath(item.categorySlug, item.slug) : `/product/${item.slug}`}
-                    className="border border-zinc-700 bg-black/50 p-4 transition hover:border-[#5e000e]"
+                    className="border border-zinc-300 bg-black/5 p-4 transition hover:border-[#5e000e]"
                   >
-                    <p className="text-sm font-semibold text-white">{item.title}</p>
+                    <p className="text-sm font-semibold text-[#1A1A1A]">{item.title}</p>
                     {typeof item.price === "number" ? (
                       <p className="mt-1 text-sm text-[#d7b4bb]">{item.price.toFixed(2)} MDL</p>
                     ) : null}

@@ -34,7 +34,7 @@ export default function CartPage() {
   if (cart.length === 0) {
     return (
       <div className="mx-auto max-w-7xl px-4 py-24 text-center sm:px-6 lg:px-8">
-        <h1 className="brand-serif text-3xl tracking-[0.12em] text-white">Coșul este gol</h1>
+        <h1 className="brand-serif text-3xl tracking-[0.12em] text-[#1A1A1A]">Coșul este gol</h1>
         <p className="mt-4 text-sm tracking-wide text-zinc-400">Adaugă produse în coș pentru a continua.</p>
         <Link
           href="/search"
@@ -47,18 +47,18 @@ export default function CartPage() {
   }
 
   return (
-    <div className="bg-[#09090c] text-white">
+    <div className="bg-[#F8F4F3] text-[#1A1A1A]">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <h1 className="brand-serif mb-10 text-3xl tracking-[0.12em] text-white">Coșul tău</h1>
+        <h1 className="brand-serif mb-10 text-3xl tracking-[0.12em] text-[#1A1A1A]">Coșul tău</h1>
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div className="space-y-4 lg:col-span-2">
             {cart.map((item) => (
               <div
                 key={item.productId}
-                className="flex gap-4 border border-zinc-800 bg-[#121216] p-4"
+                className="flex gap-4 border border-zinc-200 bg-[#EFEBEA] p-4"
               >
-                <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden bg-zinc-900">
+                <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden bg-zinc-100">
                   {item.imageUrl ? (
                     <Image
                       src={item.imageUrl}
@@ -67,7 +67,7 @@ export default function CartPage() {
                       className="object-cover"
                     />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center text-xs text-zinc-500">
+                    <div className="flex h-full w-full items-center justify-center text-xs text-zinc-400">
                       Fără imagine
                     </div>
                   )}
@@ -77,7 +77,7 @@ export default function CartPage() {
                   <div>
                     <Link
                       href={item.categorySlug ? getProductPath(item.categorySlug, item.slug) : `/product/${item.slug}`}
-                      className="text-sm font-semibold uppercase tracking-wide text-zinc-100 transition hover:text-[#5e000e]"
+                      className="text-sm font-semibold uppercase tracking-wide text-zinc-800 transition hover:text-[#5e000e]"
                     >
                       {item.titleSnapshot}
                     </Link>
@@ -87,19 +87,19 @@ export default function CartPage() {
                   </div>
 
                   <div className="flex items-center gap-4">
-                    <div className="flex items-center border border-zinc-700">
+                    <div className="flex items-center border border-zinc-300">
                       <button
                         onClick={() => updateQuantity(item.productId, item.quantity - 1)}
-                        className="px-3 py-1 text-sm text-zinc-300 transition hover:bg-zinc-800"
+                        className="px-3 py-1 text-sm text-zinc-600 transition hover:bg-zinc-200"
                       >
                         −
                       </button>
-                      <span className="min-w-[3rem] px-3 py-1 text-center text-sm text-zinc-200">
+                      <span className="min-w-[3rem] px-3 py-1 text-center text-sm text-zinc-700">
                         {item.quantity}
                       </span>
                       <button
                         onClick={() => updateQuantity(item.productId, item.quantity + 1)}
-                        className="px-3 py-1 text-sm text-zinc-300 transition hover:bg-zinc-800"
+                        className="px-3 py-1 text-sm text-zinc-600 transition hover:bg-zinc-200"
                       >
                         +
                       </button>
@@ -107,7 +107,7 @@ export default function CartPage() {
 
                     <button
                       onClick={() => removeItem(item.productId)}
-                      className="text-xs uppercase tracking-wider text-zinc-500 transition hover:text-red-400"
+                      className="text-xs uppercase tracking-wider text-zinc-400 transition hover:text-red-600"
                     >
                       Șterge
                     </button>
@@ -115,7 +115,7 @@ export default function CartPage() {
                 </div>
 
                 <div className="flex items-center text-right">
-                  <p className="text-base font-bold text-zinc-100">
+                  <p className="text-base font-bold text-zinc-800">
                     {(item.priceSnapshot * item.quantity).toFixed(2)} MDL
                   </p>
                 </div>
@@ -123,22 +123,22 @@ export default function CartPage() {
             ))}
           </div>
 
-          <div className="h-fit border border-zinc-800 bg-[#121216] p-6">
-            <h2 className="brand-serif mb-6 text-xl tracking-[0.1em] text-white">Sumar</h2>
+          <div className="h-fit border border-zinc-200 bg-[#EFEBEA] p-6">
+            <h2 className="brand-serif mb-6 text-xl tracking-[0.1em] text-[#1A1A1A]">Sumar</h2>
 
-            <div className="space-y-3 text-sm text-zinc-300">
+            <div className="space-y-3 text-sm text-zinc-600">
               <div className="flex justify-between">
                 <span>Subtotal</span>
                 <span>{total.toFixed(2)} MDL</span>
               </div>
               <div className="flex justify-between">
                 <span>Livrare</span>
-                <span className="text-zinc-500">Se calculează</span>
+                <span className="text-zinc-400">Se calculează</span>
               </div>
             </div>
 
-            <div className="my-6 border-t border-zinc-800 pt-6">
-              <div className="flex justify-between text-lg font-bold text-white">
+            <div className="my-6 border-t border-zinc-200 pt-6">
+              <div className="flex justify-between text-lg font-bold text-[#1A1A1A]">
                 <span>Total</span>
                 <span>{total.toFixed(2)} MDL</span>
               </div>
@@ -153,7 +153,7 @@ export default function CartPage() {
 
             <Link
               href="/search"
-              className="mt-3 block w-full text-center text-xs uppercase tracking-wider text-zinc-500 transition hover:text-white"
+              className="mt-3 block w-full text-center text-xs uppercase tracking-wider text-zinc-400 transition hover:text-[#1A1A1A]"
             >
               Continuă cumpărăturile
             </Link>

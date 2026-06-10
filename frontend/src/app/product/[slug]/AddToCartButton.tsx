@@ -72,7 +72,7 @@ export default function AddToCartButton({ product, variant = "default" }: AddToC
     return (
       <button
         disabled
-        className="w-full py-3 bg-zinc-800 text-zinc-500 rounded-lg cursor-not-allowed"
+        className="w-full py-3 bg-zinc-800 text-zinc-400 rounded-lg cursor-not-allowed"
       >
         Stoc epuizat
       </button>
@@ -81,12 +81,12 @@ export default function AddToCartButton({ product, variant = "default" }: AddToC
 
   const quantityWrapperClass =
     variant === "dark"
-      ? "flex items-center border border-zinc-700 bg-black"
+      ? "flex items-center border border-zinc-300 bg-[#F8F4F3]"
       : "flex items-center border border-gray-300 rounded-lg";
 
   const quantityButtonClass =
     variant === "dark"
-      ? "px-4 py-3 text-xl text-zinc-300 transition hover:bg-zinc-900"
+      ? "px-4 py-3 text-xl text-zinc-600 transition hover:bg-zinc-100"
       : "px-3 py-2 hover:bg-gray-100";
 
   const addButtonClass =
@@ -103,7 +103,7 @@ export default function AddToCartButton({ product, variant = "default" }: AddToC
         >
           -
         </button>
-        <span className="px-3 py-2 min-w-[3rem] text-center text-white">{quantity}</span>
+        <span className="px-3 py-2 min-w-[3rem] text-center text-[#1A1A1A]">{quantity}</span>
         <button
           onClick={() => setQuantity(Math.min(product.stockQuantity, quantity + 1))}
           className={quantityButtonClass}

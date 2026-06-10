@@ -27,10 +27,10 @@ export default function WishlistPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-      <h1 className="brand-serif text-4xl tracking-[0.12em] text-white">Favorite</h1>
+      <h1 className="brand-serif text-4xl tracking-[0.12em] text-[#1A1A1A]">Favorite</h1>
 
       {items.length === 0 ? (
-        <div className="mt-6 rounded border border-zinc-800 bg-zinc-900/60 p-6 text-zinc-300">
+        <div className="mt-6 rounded border border-zinc-200 bg-zinc-100/60 p-6 text-zinc-600">
           Nu ai produse in favorite.
         </div>
       ) : (
@@ -42,7 +42,7 @@ export default function WishlistPage() {
               className="panel-surface block p-5 transition hover:border-[#5e000e]"
             >
               <p className="text-xs uppercase tracking-[0.14em] text-zinc-400">Produs favorit</p>
-              <h2 className="mt-2 text-lg font-semibold text-white">{item.title}</h2>
+              <h2 className="mt-2 text-lg font-semibold text-[#1A1A1A]">{item.title}</h2>
               {typeof item.price === "number" && (
                 <p className="mt-2 text-[#d7b4bb]">{item.price.toFixed(2)} MDL</p>
               )}

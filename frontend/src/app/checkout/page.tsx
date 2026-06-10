@@ -113,17 +113,17 @@ export default function CheckoutPage() {
     }
   };
 
-  const inputClass = "w-full border border-zinc-700 bg-black px-4 py-3 text-sm text-white placeholder-zinc-500 transition focus:border-[#5e000e] focus:outline-none";
+  const inputClass = "w-full border border-zinc-300 bg-[#F8F4F3] px-4 py-3 text-sm text-[#1A1A1A] placeholder-zinc-400 transition focus:border-[#5e000e] focus:outline-none";
 
   return (
-    <div className="bg-[#09090c] text-white">
+    <div className="bg-[#F8F4F3] text-[#1A1A1A]">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <h1 className="brand-serif mb-10 text-3xl tracking-[0.12em] text-white">Finalizează comanda</h1>
+        <h1 className="brand-serif mb-10 text-3xl tracking-[0.12em] text-[#1A1A1A]">Finalizează comanda</h1>
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <form onSubmit={handleSubmit} className="space-y-5">
             {error && (
-              <div className="border border-red-800 bg-red-900/30 px-4 py-3 text-sm text-red-300">
+              <div className="border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
                 {error}
               </div>
             )}
@@ -203,7 +203,7 @@ export default function CheckoutPage() {
                 Metodă de plată
               </label>
               <div className="space-y-2">
-                <label className="flex cursor-pointer items-center gap-3 border border-zinc-700 bg-black p-3 text-sm text-zinc-200 transition hover:border-zinc-500">
+                <label className="flex cursor-pointer items-center gap-3 border border-zinc-300 bg-[#F8F4F3] p-3 text-sm text-zinc-700 transition hover:border-zinc-300">
                   <input
                     type="radio"
                     name="payment"
@@ -216,7 +216,7 @@ export default function CheckoutPage() {
                   />
                   <span>Plată la livrare (cash)</span>
                 </label>
-                <label className="flex cursor-pointer items-center gap-3 border border-zinc-700 bg-black p-3 text-sm text-zinc-200 transition hover:border-zinc-500">
+                <label className="flex cursor-pointer items-center gap-3 border border-zinc-300 bg-[#F8F4F3] p-3 text-sm text-zinc-700 transition hover:border-zinc-300">
                   <input
                     type="radio"
                     name="payment"
@@ -241,23 +241,23 @@ export default function CheckoutPage() {
             </button>
           </form>
 
-          <div className="h-fit border border-zinc-800 bg-[#121216] p-6">
-            <h2 className="brand-serif mb-6 text-xl tracking-[0.1em] text-white">Sumar comandă</h2>
+          <div className="h-fit border border-zinc-200 bg-[#EFEBEA] p-6">
+            <h2 className="brand-serif mb-6 text-xl tracking-[0.1em] text-[#1A1A1A]">Sumar comandă</h2>
 
             <div className="space-y-3">
               {cart.map((item) => (
-                <div key={item.productId} className="flex justify-between text-sm text-zinc-300">
+                <div key={item.productId} className="flex justify-between text-sm text-zinc-600">
                   <span>
                     {item.titleSnapshot}{" "}
-                    <span className="text-zinc-500">x{item.quantity}</span>
+                    <span className="text-zinc-400">x{item.quantity}</span>
                   </span>
                   <span>{(item.priceSnapshot * item.quantity).toFixed(2)} MDL</span>
                 </div>
               ))}
             </div>
 
-            <div className="my-6 border-t border-zinc-800 pt-6">
-              <div className="flex justify-between text-lg font-bold text-white">
+            <div className="my-6 border-t border-zinc-200 pt-6">
+              <div className="flex justify-between text-lg font-bold text-[#1A1A1A]">
                 <span>Total</span>
                 <span className="text-[#5e000e]">{total.toFixed(2)} MDL</span>
               </div>

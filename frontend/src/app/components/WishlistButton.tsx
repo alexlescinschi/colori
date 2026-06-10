@@ -50,7 +50,7 @@ export default function WishlistButton({
         onClick={onToggle}
         className={
           className ||
-          "w-full border border-white/40 px-5 py-3 text-sm font-semibold tracking-wide uppercase text-white transition hover:border-white"
+          "w-full border border-black/10 px-5 py-3 text-sm font-semibold tracking-wide uppercase text-[#1A1A1A] transition hover:border-black/30"
         }
       >
         {active ? "In favorite" : label}
@@ -65,7 +65,7 @@ export default function WishlistButton({
       onClick={onToggle}
       className={
         className ||
-        "inline-flex h-10 w-10 items-center justify-center rounded-full border border-zinc-700 bg-zinc-950/60 text-white transition hover:border-[#5e000e]"
+        "inline-flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 bg-zinc-50/60 text-[#1A1A1A] transition hover:border-[#5e000e]"
       }
     >
       <svg viewBox="0 0 24 24" className="h-5 w-5" fill={active ? "currentColor" : "none"}>

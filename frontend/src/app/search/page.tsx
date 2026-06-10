@@ -83,9 +83,9 @@ export default async function SearchPage({
   const products = await getCatalogProducts(filters);
 
   return (
-    <div className="bg-[#09090c] text-white">
+    <div className="bg-[#F8F4F3] text-[#1A1A1A]">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <h1 className="brand-serif text-4xl tracking-[0.12em] text-white">Catalog Produse</h1>
+        <h1 className="brand-serif text-4xl tracking-[0.12em] text-[#1A1A1A]">Catalog Produse</h1>
         <p className="mt-2 text-sm text-zinc-400">Filtreaza in stanga si exploreaza lista de produse in dreapta.</p>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[280px_1fr]">
@@ -98,13 +98,13 @@ export default async function SearchPage({
                 name="q"
                 defaultValue={filters.q || ""}
                 placeholder="Cauta produs"
-                className="w-full border border-zinc-700 bg-black px-4 py-3 text-sm text-white"
+                className="w-full border border-zinc-300 bg-[#F8F4F3] px-4 py-3 text-sm text-[#1A1A1A]"
               />
 
               <select
                 name="category"
                 defaultValue={filters.category || ""}
-                className="w-full border border-zinc-700 bg-black px-4 py-3 text-sm text-white"
+                className="w-full border border-zinc-300 bg-[#F8F4F3] px-4 py-3 text-sm text-[#1A1A1A]"
               >
                 <option value="">Toate categoriile</option>
                 {categories.data.map((category) => (
@@ -115,7 +115,7 @@ export default async function SearchPage({
               <select
                 name="sort"
                 defaultValue={filters.sort || "name-asc"}
-                className="w-full border border-zinc-700 bg-black px-4 py-3 text-sm text-white"
+                className="w-full border border-zinc-300 bg-[#F8F4F3] px-4 py-3 text-sm text-[#1A1A1A]"
               >
                 <option value="name-asc">Nume A-Z</option>
                 <option value="name-desc">Nume Z-A</option>
@@ -132,7 +132,7 @@ export default async function SearchPage({
                 </button>
                 <Link
                   href="/search"
-                  className="inline-flex items-center border border-zinc-700 px-4 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-zinc-200"
+                  className="inline-flex items-center border border-zinc-300 px-4 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-zinc-700"
                 >
                   Reset
                 </Link>
@@ -146,7 +146,7 @@ export default async function SearchPage({
             </div>
 
             {products.data.length === 0 ? (
-              <p className="rounded border border-zinc-800 bg-zinc-900/50 p-6 text-zinc-400">Nu exista produse pentru filtrul selectat.</p>
+              <p className="rounded border border-zinc-200 bg-zinc-100/50 p-6 text-zinc-400">Nu exista produse pentru filtrul selectat.</p>
             ) : (
               <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
                 {products.data.map((product) => (
@@ -165,7 +165,7 @@ export default async function SearchPage({
                     </div>
 
                     <Link href={getProductPathFromProduct(product)} className="mt-3 block">
-                      <div className="relative aspect-square overflow-hidden border border-zinc-800 bg-zinc-950">
+                      <div className="relative aspect-square overflow-hidden border border-zinc-200 bg-zinc-50">
                         {product.images?.[0]?.url ? (
                           <Image
                             src={toAbsoluteMediaUrl(product.images[0].url)}
@@ -175,13 +175,13 @@ export default async function SearchPage({
                             sizes="(max-width: 1024px) 50vw, 25vw"
                           />
                         ) : (
-                          <div className="flex h-full items-center justify-center text-zinc-500">
+                          <div className="flex h-full items-center justify-center text-zinc-400">
                             {product.title.slice(0, 2).toUpperCase()}
                           </div>
                         )}
                       </div>
 
-                      <h3 className="mt-4 min-h-12 text-sm font-semibold uppercase tracking-[0.08em] text-zinc-100">{product.title}</h3>
+                      <h3 className="mt-4 min-h-12 text-sm font-semibold uppercase tracking-[0.08em] text-zinc-800">{product.title}</h3>
                       <p className="mt-2 text-lg font-semibold text-[#d7b4bb]">{product.price.toFixed(2)} MDL</p>
                     </Link>
                   </article>

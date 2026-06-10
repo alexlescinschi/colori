@@ -40,7 +40,7 @@ export default function ProductGallery({ images, productTitle }: ProductGalleryP
   if (!active) {
     return (
       <div className="panel-surface overflow-hidden p-4 md:p-6">
-        <div className="flex aspect-[4/5] items-center justify-center border border-zinc-800 bg-[radial-gradient(circle_at_30%_20%,#272732_0%,#0b0b10_65%)] text-7xl text-zinc-500 md:text-8xl">
+        <div className="flex aspect-[4/5] items-center justify-center border border-zinc-200 bg-[radial-gradient(circle_at_30%_20%,#E8E4E3_0%,#F8F4F3_65%)] text-7xl text-zinc-400 md:text-8xl">
           {productTitle.slice(0, 1).toUpperCase()}
         </div>
       </div>
@@ -52,7 +52,7 @@ export default function ProductGallery({ images, productTitle }: ProductGalleryP
       <button
         type="button"
         onClick={() => setZoomed((current) => !current)}
-        className="group relative block w-full overflow-hidden border border-zinc-800 bg-black"
+        className="group relative block w-full overflow-hidden border border-zinc-200 bg-[#F8F4F3]"
       >
         <div className="relative aspect-[4/5]">
           <Image
@@ -66,7 +66,7 @@ export default function ProductGallery({ images, productTitle }: ProductGalleryP
           />
         </div>
 
-        <span className="absolute bottom-3 right-3 rounded-full border border-zinc-600 bg-black/70 px-3 py-1 text-[10px] uppercase tracking-[0.12em] text-white">
+        <span className="absolute bottom-3 right-3 rounded-full border border-zinc-400 bg-black/10 px-3 py-1 text-[10px] uppercase tracking-[0.12em] text-[#1A1A1A]">
           {zoomed ? "Zoom out" : "Zoom in"}
         </span>
       </button>
@@ -81,7 +81,7 @@ export default function ProductGallery({ images, productTitle }: ProductGalleryP
               setZoomed(false);
             }}
             className={`relative aspect-square overflow-hidden border ${
-              index === activeIndex ? "border-[#5e000e]" : "border-zinc-800"
+              index === activeIndex ? "border-[#5e000e]" : "border-zinc-200"
             }`}
           >
             <Image

@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0c;
-  --surface: #121216;
-  --surface-soft: #17171c;
-  --foreground: #f3f3f4;
-  --muted: #a2a2a8;
+  --background: #F8F4F3;
+  --surface: #EFEBEA;
+  --surface-soft: #EBE7E6;
+  --foreground: #1A1A1A;
+  --muted: #6B6B6B;
   --brand: #5e000e;
   --brand-strong: #7e1023;
-  --line: #2a2a33;
+  --line: #D4D0CF;
 }
 
 @theme inline {
@@ -25,11 +25,11 @@ body {
 }
 
 .brand-serif {
-  font-family: var(--font-cinzel), serif;
+  font-family: var(--font-playfair), serif;
 }
 
 .icon-link {
-  @apply inline-flex h-10 w-10 items-center justify-center rounded-full border border-zinc-700 text-white transition hover:border-[#5e000e] hover:text-white;
+  @apply inline-flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 text-[#1A1A1A] transition hover:border-[#5e000e] hover:text-[#1A1A1A];
 }
 
 .badge-counter {
@@ -38,7 +38,7 @@ body {
 
 .panel-surface {
   background:
-    radial-gradient(circle at 20% -10%, rgba(126, 16, 35, 0.3), transparent 45%),
-    linear-gradient(160deg, #131318 0%, #09090c 55%, #101015 100%);
+    radial-gradient(circle at 20% -10%, rgba(126, 16, 35, 0.08), transparent 45%),
+    linear-gradient(160deg, #EFEBEA 0%, #F8F4F3 55%, #F0ECEB 100%);
   border: 1px solid var(--line);
 }

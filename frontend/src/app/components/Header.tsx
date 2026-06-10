@@ -50,7 +50,7 @@ export default function Header() {
         Livrare gratuita pentru comenzi peste 299 MDL
       </div>
 
-      <div className="border-b border-zinc-800 bg-black text-white">
+      <div className="border-b border-zinc-200 bg-[#F8F4F3] text-[#1A1A1A]">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <button
             type="button"
@@ -74,11 +74,11 @@ export default function Header() {
           </Link>
 
           <nav className="hidden items-center gap-8 text-sm tracking-[0.12em] uppercase md:flex">
-            <Link href="/" className="transition hover:text-zinc-300">Acasă</Link>
-            <Link href="/search" className="transition hover:text-zinc-300">Produse</Link>
-            <Link href="/despre-noi" className="transition hover:text-zinc-300">Despre noi</Link>
-            <Link href="/academie" className="transition hover:text-zinc-300">Academie</Link>
-            <Link href="/contacte" className="transition hover:text-zinc-300">Contacte</Link>
+            <Link href="/" className="transition hover:text-zinc-600">Acasă</Link>
+            <Link href="/search" className="transition hover:text-zinc-600">Produse</Link>
+            <Link href="/despre-noi" className="transition hover:text-zinc-600">Despre noi</Link>
+            <Link href="/academie" className="transition hover:text-zinc-600">Academie</Link>
+            <Link href="/contacte" className="transition hover:text-zinc-600">Contacte</Link>
           </nav>
 
           <div suppressHydrationWarning className="flex items-center gap-3 md:gap-4">
@@ -109,8 +109,8 @@ export default function Header() {
 
     {menuOpen && (
       <div className="fixed inset-0 z-[60] md:hidden">
-        <div className="absolute inset-0 bg-black/60" onClick={() => setMenuOpen(false)} />
-        <div className="absolute left-0 top-0 h-full w-72 border-r border-zinc-800 bg-[#09090c] p-6 pt-24">
+        <div className="absolute inset-0 bg-black/5" onClick={() => setMenuOpen(false)} />
+        <div className="absolute left-0 top-0 h-full w-72 border-r border-zinc-200 bg-[#F8F4F3] p-6 pt-24">
           <nav className="flex flex-col gap-2">
             {[
               { href: "/", label: "Acasă" },
@@ -123,7 +123,7 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className="border-b border-zinc-800 py-3 text-sm uppercase tracking-[0.12em] text-zinc-200 transition hover:text-white"
+                className="border-b border-zinc-200 py-3 text-sm uppercase tracking-[0.12em] text-zinc-700 transition hover:text-[#1A1A1A]"
               >
                 {link.label}
               </Link>

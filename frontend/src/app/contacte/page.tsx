@@ -74,7 +74,7 @@ const hours = [
 
 export default function ContactePage() {
   return (
-    <div className="bg-[#09090c] text-white">
+    <div className="bg-[#F8F4F3] text-[#1A1A1A]">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <h1 className="brand-serif mb-4 text-center text-4xl tracking-[0.15em] md:text-5xl">
           Contacte
@@ -90,9 +90,9 @@ export default function ContactePage() {
               href={c.href}
               target={c.href.startsWith("http") ? "_blank" : undefined}
               rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="group flex flex-col items-center gap-4 border border-zinc-800 bg-[#121216] p-8 text-center transition hover:border-[#5e000e]"
+              className="group flex flex-col items-center gap-4 border border-zinc-200 bg-[#EFEBEA] p-8 text-center transition hover:border-[#5e000e]"
             >
-              <div className="text-zinc-300 transition group-hover:text-[#5e000e]">
+              <div className="text-zinc-600 transition group-hover:text-[#5e000e]">
                 {c.icon}
               </div>
               <div>
@@ -127,12 +127,12 @@ export default function ContactePage() {
           <h2 className="brand-serif mb-6 text-center text-xl tracking-[0.12em]">
             Program de lucru
           </h2>
-          <div className="border border-zinc-800 bg-[#121216] p-6">
+          <div className="border border-zinc-200 bg-[#EFEBEA] p-6">
             <table className="w-full text-sm">
               <tbody>
                 {hours.map((h) => (
-                  <tr key={h.day} className="border-b border-zinc-800 last:border-0">
-                    <td className="py-3 font-medium text-zinc-200">{h.day}</td>
+                  <tr key={h.day} className="border-b border-zinc-200 last:border-0">
+                    <td className="py-3 font-medium text-zinc-700">{h.day}</td>
                     <td className="py-3 text-right text-zinc-400">{h.time}</td>
                   </tr>
                 ))}
