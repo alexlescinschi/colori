@@ -7,7 +7,7 @@ export async function fetchAPI(
   const url = new URL(`/api${endpoint}`, STRAPI_URL);
   
   if (options?.locale) {
-    url.searchParams.append("locale", options.locale);
+    url.searchParams.append("locale", options.locale === "ro" ? "en" : options.locale);
   }
 
   if (options?.params) {
