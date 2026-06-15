@@ -49,11 +49,10 @@ async function getRelatedProducts(categorySlug: string, excludeSlug: string, loc
 export default async function ProductPage({
   params,
 }: {
-  params: Promise<{ categorySlug: string; productSlug: string }>;
+  params: Promise<{ locale: string; categorySlug: string; productSlug: string }>;
 }) {
-  const { categorySlug, productSlug } = await params;
+  const { locale, categorySlug, productSlug } = await params;
   const t = await getTranslations();
-  const locale = await getLocale();
   const product = await getProduct(categorySlug, productSlug, locale);
   const relatedProducts = await getRelatedProducts(categorySlug, productSlug, locale);
 
