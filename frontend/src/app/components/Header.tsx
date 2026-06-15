@@ -172,30 +172,6 @@ export default function Header() {
               </Link>
             ))}
           </nav>
-
-          <div className="mt-6 border-t border-zinc-200 pt-4">
-            <p className="mb-2 text-xs uppercase tracking-[0.12em] text-zinc-500">{t("header.language")}</p>
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={() => { setLocaleCookie("ro"); setMenuOpen(false); }}
-                className={`flex-1 rounded border px-3 py-2 text-center text-xs font-semibold uppercase tracking-wider transition ${
-                  locale === "ro" ? "border-[#5e000e] bg-[#5e000e] text-white" : "border-zinc-300 text-zinc-600 hover:bg-zinc-100"
-                }`}
-              >
-                RO
-              </button>
-              <button
-                type="button"
-                onClick={() => { setLocaleCookie("it"); setMenuOpen(false); }}
-                className={`flex-1 rounded border px-3 py-2 text-center text-xs font-semibold uppercase tracking-wider transition ${
-                  locale === "it" ? "border-[#5e000e] bg-[#5e000e] text-white" : "border-zinc-300 text-zinc-600 hover:bg-zinc-100"
-                }`}
-              >
-                IT
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     )}
