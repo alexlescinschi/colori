@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { CartItem } from "@/lib/strapi";
 
 interface CheckoutForm {
@@ -21,6 +22,7 @@ function generateOrderNumber() {
 
 export default function CheckoutPage() {
   const router = useRouter();
+  const t = useTranslations();
   const [cart] = useState<CartItem[]>(() => {
     if (typeof window === "undefined") return [];
     return JSON.parse(localStorage.getItem("cart") || "[]") as CartItem[];
@@ -43,10 +45,11 @@ export default function CheckoutPage() {
   }, [cart.length, router]);
 
   if (cart.length === 0) {
-    return <div className="mx-auto max-w-7xl px-4 py-8 text-zinc-400">Se încarcă...</div>;
+    return <div className="mx-auto max-w-7xl px-4 py-8 text-zinc-400">{t("checkout.loading")}</div>;
   }
 
   const total = cart.reduce((sum, item) => sum + item.priceSnapshot * item.quantity, 0);
+  const mdl = t("common.mdl");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,20 +57,20 @@ export default function CheckoutPage() {
     setError("");
 
     if (!form.customerName || !form.customerEmail || !form.customerPhone || !form.customerAddress) {
-      setError("Completează toate câmpurile obligatorii");
+      setError(t("checkout.errors.required"));
       setLoading(false);
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(form.customerEmail)) {
-      setError("Adresa de email nu este validă");
+      setError(t("checkout.errors.email"));
       setLoading(false);
       return;
     }
 
     if (form.customerPhone.length < 8) {
-      setError("Numărul de telefon nu este valid");
+      setError(t("checkout.errors.phone"));
       setLoading(false);
       return;
     }
@@ -99,7 +102,7 @@ export default function CheckoutPage() {
       })();
 
       if (!response.ok) {
-        throw new Error(data?.error?.message || raw || "Eroare la plasarea comenzii");
+        throw new Error(data?.error?.message || raw || t("checkout.errors.generic"));
       }
 
       localStorage.removeItem("cart");
@@ -107,7 +110,7 @@ export default function CheckoutPage() {
 
       router.push(`/order-confirmation?order=${data?.data?.orderNumber || orderNumber}`);
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Eroare la plasarea comenzii");
+      setError(err instanceof Error ? err.message : t("checkout.errors.generic"));
     } finally {
       setLoading(false);
     }
@@ -118,7 +121,7 @@ export default function CheckoutPage() {
   return (
     <div className="bg-[#F8F4F3] text-[#1A1A1A]">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <h1 className="brand-serif mb-10 text-3xl tracking-[0.12em] text-[#1A1A1A]">Finalizează comanda</h1>
+        <h1 className="brand-serif mb-10 text-3xl tracking-[0.12em] text-[#1A1A1A]">{t("checkout.title")}</h1>
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -130,77 +133,77 @@ export default function CheckoutPage() {
 
             <div>
               <label className="mb-1 block text-xs uppercase tracking-wider text-zinc-400">
-                Nume și prenume *
+                {t("checkout.form.name")}
               </label>
               <input
                 type="text"
                 value={form.customerName}
                 onChange={(e) => setForm({ ...form, customerName: e.target.value })}
                 className={inputClass}
-                placeholder="Ex: Ion Popescu"
+                placeholder={t("checkout.form.namePlaceholder")}
                 required
               />
             </div>
 
             <div>
               <label className="mb-1 block text-xs uppercase tracking-wider text-zinc-400">
-                Email *
+                {t("checkout.form.email")}
               </label>
               <input
                 type="email"
                 value={form.customerEmail}
                 onChange={(e) => setForm({ ...form, customerEmail: e.target.value })}
                 className={inputClass}
-                placeholder="exemplu@email.com"
+                placeholder={t("checkout.form.emailPlaceholder")}
                 required
               />
             </div>
 
             <div>
               <label className="mb-1 block text-xs uppercase tracking-wider text-zinc-400">
-                Telefon *
+                {t("checkout.form.phone")}
               </label>
               <input
                 type="tel"
                 value={form.customerPhone}
                 onChange={(e) => setForm({ ...form, customerPhone: e.target.value })}
                 className={inputClass}
-                placeholder="+373 69 123 456"
+                placeholder={t("checkout.form.phonePlaceholder")}
                 required
               />
             </div>
 
             <div>
               <label className="mb-1 block text-xs uppercase tracking-wider text-zinc-400">
-                Adresă de livrare *
+                {t("checkout.form.address")}
               </label>
               <input
                 type="text"
                 value={form.customerAddress}
                 onChange={(e) => setForm({ ...form, customerAddress: e.target.value })}
                 className={inputClass}
-                placeholder="Strada, număr, bloc, apartament"
+                placeholder={t("checkout.form.addressPlaceholder")}
                 required
               />
             </div>
 
             <div>
               <label className="mb-1 block text-xs uppercase tracking-wider text-zinc-400">
-                Oraș *
+                {t("checkout.form.city")}
               </label>
               <input
                 type="text"
                 value={form.customerCity}
                 onChange={(e) => setForm({ ...form, customerCity: e.target.value })}
                 className={inputClass}
-                placeholder="Chișinău"
+                placeholder={t("checkout.form.cityPlaceholder")}
                 required
               />
             </div>
 
             <div>
               <label className="mb-3 block text-xs uppercase tracking-wider text-zinc-400">
-                Metodă de plată
+                {t("checkout.form.payment")}
               </label>
               <div className="space-y-2">
                 <label className="flex cursor-pointer items-center gap-3 border border-zinc-300 bg-[#F8F4F3] p-3 text-sm text-zinc-700 transition hover:border-zinc-300">
@@ -214,7 +217,7 @@ export default function CheckoutPage() {
                     }
                     className="accent-[#5e000e]"
                   />
-                  <span>Plată la livrare (cash)</span>
+                  <span>{t("checkout.form.cash")}</span>
                 </label>
                 <label className="flex cursor-pointer items-center gap-3 border border-zinc-300 bg-[#F8F4F3] p-3 text-sm text-zinc-700 transition hover:border-zinc-300">
                   <input
@@ -227,7 +230,7 @@ export default function CheckoutPage() {
                     }
                     className="accent-[#5e000e]"
                   />
-                  <span>Transfer bancar</span>
+                  <span>{t("checkout.form.transfer")}</span>
                 </label>
               </div>
             </div>
@@ -237,12 +240,14 @@ export default function CheckoutPage() {
               disabled={loading}
               className="w-full bg-[#5e000e] px-6 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-[#7e1023] disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {loading ? "Se procesează..." : `Plasează comanda (${total.toFixed(2)} MDL)`}
+              {loading
+                ? t("checkout.processing")
+                : t("checkout.submit", { total: total.toFixed(2) })}
             </button>
           </form>
 
           <div className="h-fit border border-zinc-200 bg-[#EFEBEA] p-6">
-            <h2 className="brand-serif mb-6 text-xl tracking-[0.1em] text-[#1A1A1A]">Sumar comandă</h2>
+            <h2 className="brand-serif mb-6 text-xl tracking-[0.1em] text-[#1A1A1A]">{t("checkout.summary")}</h2>
 
             <div className="space-y-3">
               {cart.map((item) => (
@@ -251,15 +256,15 @@ export default function CheckoutPage() {
                     {item.titleSnapshot}{" "}
                     <span className="text-zinc-400">x{item.quantity}</span>
                   </span>
-                  <span>{(item.priceSnapshot * item.quantity).toFixed(2)} MDL</span>
+                  <span>{(item.priceSnapshot * item.quantity).toFixed(2)} {mdl}</span>
                 </div>
               ))}
             </div>
 
             <div className="my-6 border-t border-zinc-200 pt-6">
               <div className="flex justify-between text-lg font-bold text-[#1A1A1A]">
-                <span>Total</span>
-                <span className="text-[#5e000e]">{total.toFixed(2)} MDL</span>
+                <span>{t("checkout.total")}</span>
+                <span className="text-[#5e000e]">{total.toFixed(2)} {mdl}</span>
               </div>
             </div>
           </div>

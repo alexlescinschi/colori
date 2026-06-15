@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   isWishlisted,
   toggleWishlist,
@@ -18,10 +19,11 @@ interface WishlistButtonProps {
 export default function WishlistButton({
   product,
   className,
-  label = "Adauga la favorite",
+  label,
   variant = "icon",
 }: WishlistButtonProps) {
   const [active, setActive] = useState(false);
+  const t = useTranslations();
 
   useEffect(() => {
     const syncWishlistState = async () => {
@@ -43,6 +45,9 @@ export default function WishlistButton({
     setActive(Boolean(status));
   };
 
+  const defaultLabel = t("wishlist.add");
+  const finalLabel = label || defaultLabel;
+
   if (variant === "outline") {
     return (
       <button
@@ -53,7 +58,7 @@ export default function WishlistButton({
           "w-full border border-black/10 px-5 py-3 text-sm font-semibold tracking-wide uppercase text-[#1A1A1A] transition hover:border-black/30"
         }
       >
-        {active ? "In favorite" : label}
+        {active ? t("wishlist.inWishlist") : finalLabel}
       </button>
     );
   }
@@ -61,7 +66,7 @@ export default function WishlistButton({
   return (
     <button
       type="button"
-      aria-label={label}
+      aria-label={finalLabel}
       onClick={onToggle}
       className={
         className ||

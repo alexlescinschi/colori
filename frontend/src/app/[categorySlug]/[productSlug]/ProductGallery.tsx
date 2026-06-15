@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { getStrapiUrl } from "@/lib/auth";
 
 interface GalleryImage {
@@ -34,6 +35,7 @@ export default function ProductGallery({ images, productTitle }: ProductGalleryP
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [zoomed, setZoomed] = useState(false);
+  const t = useTranslations();
 
   const active = validImages[activeIndex];
 
@@ -67,7 +69,7 @@ export default function ProductGallery({ images, productTitle }: ProductGalleryP
         </div>
 
         <span className="absolute bottom-3 right-3 rounded-full border border-zinc-400 bg-black/10 px-3 py-1 text-[10px] uppercase tracking-[0.12em] text-[#1A1A1A]">
-          {zoomed ? "Zoom out" : "Zoom in"}
+          {zoomed ? t("product.gallery.zoomOut") : t("product.gallery.zoomIn")}
         </span>
       </button>
 

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
 function Placeholder({ label }: { label: string }) {
   return (
@@ -8,75 +9,64 @@ function Placeholder({ label }: { label: string }) {
   );
 }
 
-export default function DespreNoiPage() {
+export default async function DespreNoiPage() {
+  const t = await getTranslations();
+
   return (
     <div className="bg-[#F8F4F3] text-[#1A1A1A]">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <h1 className="brand-serif mb-16 text-center text-4xl tracking-[0.15em] md:text-5xl">
-          Despre Noi
+          {t("about.title")}
         </h1>
 
         <div className="space-y-20">
           <Section
-            title="Cine suntem"
-            image={<Placeholder label="Echipa COLORI" />}
+            title={t("about.sections.who")}
+            image={<Placeholder label={t("about.sections.who")} />}
             reverse={false}
           >
             <p className="leading-relaxed text-zinc-600">
-              Suntem <strong className="text-[#1A1A1A]">Alex</strong> și <strong className="text-[#1A1A1A]">Elena</strong>, un cuplu din
-              Republica Moldova care a transformat pasiunea pentru unghii într-un business
-              înfloritor. Totul a început când Elena, pe atunci studentă, a urmat un curs de
-              manichiură și a descoperit că aceasta este chemarea ei.
+              {t("about.whoText")}
             </p>
           </Section>
 
           <Section
-            title="Începuturile"
-            image={<Placeholder label="Primele noastre produse" />}
+            title={t("about.sections.beginnings")}
+            image={<Placeholder label={t("about.sections.beginnings")} />}
             reverse={true}
           >
             <p className="leading-relaxed text-zinc-600">
-              În 2020, Elena și-a deschis propria activitate, iar în scurt timp a creat un cont
-              de Instagram pentru a-și împărtăși lucrările. Cererile pentru recomandări de
-              produse au început să curgă, iar împreună cu Alex au decis să transforme această
-              nevoie într-un magazin online.
+              {t("about.beginningsText")}
             </p>
           </Section>
 
           <Section
-            title="Ideea"
-            image={<Placeholder label="Planificare si viziune" />}
+            title={t("about.sections.idea")}
+            image={<Placeholder label={t("about.sections.idea")} />}
             reverse={false}
           >
             <p className="leading-relaxed text-zinc-600">
-              Într-o seară, la cină, Alex a venit cu ideea: să creăm un magazin online unde
-              manichiuriștii să găsească produse profesionale testate și verificate de noi.
-              Am pornit la drum, am găsit furnizori de încredere și am construit COLORI —
-              un nume care reflectă esența meseriei noastre.
+              {t("about.ideaText")}
             </p>
           </Section>
 
           <Section
-            title="Realitatea noastră"
-            image={<Placeholder label="Echipa COLORI azi" />}
+            title={t("about.sections.reality")}
+            image={<Placeholder label={t("about.sections.reality")} />}
             reverse={true}
           >
             <p className="leading-relaxed text-zinc-600">
-              Astăzi, COLORI înseamnă mult mai mult decât un magazin. Am creat o comunitate
-              de profesioniști care împărtășesc aceeași pasiune. Fiecare produs din catalog
-              este ales cu grijă, testat și aprobat de echipa noastră.
+              {t("about.realityText")}
             </p>
           </Section>
 
           <Section
-            title="De ce COLORI"
-            image={<Placeholder label="Produsele noastre" />}
+            title={t("about.sections.why")}
+            image={<Placeholder label={t("about.sections.why")} />}
             reverse={false}
           >
             <p className="leading-relaxed text-zinc-600">
-              Pentru că <strong className="text-[#1A1A1A]">fiecare detaliu contează</strong>. De la
-              formula fiecărui gel până la ambalaj și livrare — totul este gândit pentru a oferi
-              cea mai bună experiență. Sprijinul vostru ne motivează să facem mereu mai bine.
+              {t("about.whyText")}
             </p>
           </Section>
         </div>
@@ -86,7 +76,7 @@ export default function DespreNoiPage() {
             href="/search"
             className="inline-block bg-[#5e000e] px-10 py-4 text-xs font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-[#7e1023]"
           >
-            Descoperă produsele noastre
+            {t("about.cta")}
           </Link>
         </div>
       </div>

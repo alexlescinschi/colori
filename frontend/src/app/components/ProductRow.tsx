@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { getProductPath } from "@/lib/routes";
 import { getStrapiUrl } from "@/lib/auth";
 import WishlistButton from "./WishlistButton";
@@ -33,6 +34,8 @@ function toAbsoluteMediaUrl(url?: string) {
 }
 
 export default function ProductRow({ title, products }: ProductRowProps) {
+  const t = useTranslations();
+
   if (products.length === 0) {
     return null;
   }
@@ -91,7 +94,7 @@ export default function ProductRow({ title, products }: ProductRowProps) {
                   {product.title}
                 </h3>
                 <p className="mt-1 text-lg font-semibold text-[#d7b4bb]">
-                  {product.price.toFixed(2)} MDL
+                  {product.price.toFixed(2)} {t("common.mdl")}
                 </p>
               </Link>
             </article>

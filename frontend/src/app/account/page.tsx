@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { clearAuth, fetchMe, getStoredUser, login, register } from "@/lib/auth";
 import { getProductPath } from "@/lib/routes";
 import { getWishlistItems, WishlistItem } from "@/lib/wishlist";
@@ -12,6 +13,7 @@ export default function AccountPage() {
   const [wishlist, setWishlist] = useState<WishlistItem[]>([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const t = useTranslations();
 
   const [loginIdentifier, setLoginIdentifier] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -76,7 +78,7 @@ export default function AccountPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-      <h1 className="brand-serif text-4xl tracking-[0.12em] text-[#1A1A1A]">Contul meu</h1>
+      <h1 className="brand-serif text-4xl tracking-[0.12em] text-[#1A1A1A]">{t("account.title")}</h1>
 
       {!user ? (
         <div className="mt-8 grid gap-6 lg:grid-cols-2">
@@ -87,14 +89,14 @@ export default function AccountPage() {
                 onClick={() => setMode("login")}
                 className={`px-4 py-2 ${mode === "login" ? "bg-[#5e000e] text-white" : "border border-zinc-300 text-zinc-600"}`}
               >
-                Login
+                {t("account.login")}
               </button>
               <button
                 type="button"
                 onClick={() => setMode("register")}
                 className={`px-4 py-2 ${mode === "register" ? "bg-[#5e000e] text-white" : "border border-zinc-300 text-zinc-600"}`}
               >
-                Register
+                {t("account.register")}
               </button>
             </div>
 
@@ -105,7 +107,7 @@ export default function AccountPage() {
                 <input
                   value={loginIdentifier}
                   onChange={(event) => setLoginIdentifier(event.target.value)}
-                  placeholder="Email sau username"
+                  placeholder={t("account.emailPlaceholder")}
                   className="w-full border border-zinc-300 bg-[#F8F4F3] px-4 py-3 text-sm text-[#1A1A1A]"
                   required
                 />
@@ -113,7 +115,7 @@ export default function AccountPage() {
                   type="password"
                   value={loginPassword}
                   onChange={(event) => setLoginPassword(event.target.value)}
-                  placeholder="Parola"
+                  placeholder={t("account.passwordPlaceholder")}
                   className="w-full border border-zinc-300 bg-[#F8F4F3] px-4 py-3 text-sm text-[#1A1A1A]"
                   required
                 />
@@ -122,7 +124,7 @@ export default function AccountPage() {
                   disabled={loading}
                   className="w-full bg-[#5e000e] px-4 py-3 text-sm font-semibold uppercase tracking-[0.13em] text-white transition hover:bg-[#7e1023] disabled:opacity-60"
                 >
-                  {loading ? "Se proceseaza" : "Intra in cont"}
+                  {loading ? t("account.processing") : t("account.loginBtn")}
                 </button>
               </form>
             ) : (
@@ -130,7 +132,7 @@ export default function AccountPage() {
                 <input
                   value={regName}
                   onChange={(event) => setRegName(event.target.value)}
-                  placeholder="Username"
+                  placeholder={t("account.usernamePlaceholder")}
                   className="w-full border border-zinc-300 bg-[#F8F4F3] px-4 py-3 text-sm text-[#1A1A1A]"
                   required
                 />
@@ -138,7 +140,7 @@ export default function AccountPage() {
                   type="email"
                   value={regEmail}
                   onChange={(event) => setRegEmail(event.target.value)}
-                  placeholder="Email"
+                  placeholder={t("account.registerEmailPlaceholder")}
                   className="w-full border border-zinc-300 bg-[#F8F4F3] px-4 py-3 text-sm text-[#1A1A1A]"
                   required
                 />
@@ -146,7 +148,7 @@ export default function AccountPage() {
                   type="password"
                   value={regPassword}
                   onChange={(event) => setRegPassword(event.target.value)}
-                  placeholder="Parola"
+                  placeholder={t("account.registerPasswordPlaceholder")}
                   className="w-full border border-zinc-300 bg-[#F8F4F3] px-4 py-3 text-sm text-[#1A1A1A]"
                   required
                 />
@@ -155,34 +157,34 @@ export default function AccountPage() {
                   disabled={loading}
                   className="w-full bg-[#5e000e] px-4 py-3 text-sm font-semibold uppercase tracking-[0.13em] text-white transition hover:bg-[#7e1023] disabled:opacity-60"
                 >
-                  {loading ? "Se proceseaza" : "Creeaza cont"}
+                  {loading ? t("account.processing") : t("account.registerBtn")}
                 </button>
               </form>
             )}
           </section>
 
           <section className="panel-surface p-6 text-sm text-zinc-600">
-            Autentificarea iti activeaza wishlist server-side. Produsele favorite raman salvate pe contul tau.
+            {t("account.info")}
           </section>
         </div>
       ) : (
         <div className="mt-8 grid gap-6 lg:grid-cols-[320px_1fr]">
           <aside className="panel-surface p-6">
-            <p className="text-xs uppercase tracking-[0.14em] text-zinc-400">Conectat ca</p>
+            <p className="text-xs uppercase tracking-[0.14em] text-zinc-400">{t("account.loggedInAs")}</p>
             <p className="mt-2 text-lg text-[#1A1A1A]">{user.email}</p>
             <button
               type="button"
               onClick={onLogout}
               className="mt-6 border border-zinc-300 px-4 py-2 text-xs uppercase tracking-[0.13em] text-zinc-700 transition hover:border-[#5e000e] hover:text-[#5e000e]"
             >
-              Logout
+              {t("account.logout")}
             </button>
           </aside>
 
           <section className="panel-surface p-6">
-            <h2 className="brand-serif text-2xl tracking-[0.1em] text-[#1A1A1A]">Wishlist (server)</h2>
+            <h2 className="brand-serif text-2xl tracking-[0.1em] text-[#1A1A1A]">{t("account.wishlistTitle")}</h2>
             {wishlist.length === 0 ? (
-              <p className="mt-4 text-zinc-400">Nu ai produse favorite pe cont.</p>
+              <p className="mt-4 text-zinc-400">{t("account.wishlistEmpty")}</p>
             ) : (
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 {wishlist.map((item) => (
@@ -193,7 +195,7 @@ export default function AccountPage() {
                   >
                     <p className="text-sm font-semibold text-[#1A1A1A]">{item.title}</p>
                     {typeof item.price === "number" ? (
-                      <p className="mt-1 text-sm text-[#d7b4bb]">{item.price.toFixed(2)} MDL</p>
+                      <p className="mt-1 text-sm text-[#d7b4bb]">{item.price.toFixed(2)} {t("common.mdl")}</p>
                     ) : null}
                   </Link>
                 ))}

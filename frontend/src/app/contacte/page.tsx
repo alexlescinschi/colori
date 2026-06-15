@@ -1,28 +1,27 @@
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
 const contacts = [
   {
-    label: "Telefon",
+    key: "phone",
     href: "tel:+37369123456",
     icon: (
       <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor">
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
-    subtitle: "+373 69 123 456",
   },
   {
-    label: "WhatsApp",
+    key: "whatsapp",
     href: "https://wa.me/37369123456",
     icon: (
       <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor">
         <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
-    subtitle: "Scrie-ne pe WhatsApp",
   },
   {
-    label: "Email",
+    key: "email",
     href: "mailto:hello@colori.md",
     icon: (
       <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor">
@@ -30,13 +29,12 @@ const contacts = [
         <polyline points="22,6 12,13 2,6" strokeWidth="1.6" />
       </svg>
     ),
-    subtitle: "hello@colori.md",
   },
 ];
 
 const socials = [
   {
-    label: "Instagram",
+    key: "instagram",
     href: "https://instagram.com/colori.md",
     icon: (
       <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor">
@@ -47,7 +45,7 @@ const socials = [
     ),
   },
   {
-    label: "Facebook",
+    key: "facebook",
     href: "https://facebook.com/colori.md",
     icon: (
       <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
@@ -56,7 +54,7 @@ const socials = [
     ),
   },
   {
-    label: "TikTok",
+    key: "tiktok",
     href: "https://tiktok.com/@colori.md",
     icon: (
       <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
@@ -66,27 +64,29 @@ const socials = [
   },
 ];
 
-const hours = [
-  { day: "Luni — Vineri", time: "09:00 — 18:00" },
-  { day: "Sâmbătă", time: "10:00 — 15:00" },
-  { day: "Duminică", time: "Închis" },
-];
+export default async function ContactePage() {
+  const t = await getTranslations();
 
-export default function ContactePage() {
+  const hours = [
+    { day: t("contact.hoursWeek"), time: t("contact.hoursWeekTime") },
+    { day: t("contact.hoursSat"), time: t("contact.hoursSatTime") },
+    { day: t("contact.hoursSun"), time: t("contact.hoursSunTime") },
+  ];
+
   return (
     <div className="bg-[#F8F4F3] text-[#1A1A1A]">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <h1 className="brand-serif mb-4 text-center text-4xl tracking-[0.15em] md:text-5xl">
-          Contacte
+          {t("contact.title")}
         </h1>
         <p className="mb-16 text-center text-sm tracking-wide text-zinc-400">
-          Suntem aici pentru tine. Alege metoda preferată.
+          {t("contact.subtitle")}
         </p>
 
         <div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {contacts.map((c) => (
             <a
-              key={c.label}
+              key={c.key}
               href={c.href}
               target={c.href.startsWith("http") ? "_blank" : undefined}
               rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
@@ -97,25 +97,25 @@ export default function ContactePage() {
               </div>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.12em]">
-                  {c.label}
+                  {t(`contact.${c.key}`)}
                 </p>
-                <p className="mt-1 text-sm text-zinc-400">{c.subtitle}</p>
+                <p className="mt-1 text-sm text-zinc-400">{t(`contact.${c.key}Value`)}</p>
               </div>
             </a>
           ))}
         </div>
 
         <div className="mx-auto mt-16 max-w-md text-center">
-          <h2 className="brand-serif mb-6 text-xl tracking-[0.12em]">Urmărește-ne</h2>
+          <h2 className="brand-serif mb-6 text-xl tracking-[0.12em]">{t("contact.follow")}</h2>
           <div className="flex justify-center gap-4">
             {socials.map((s) => (
               <Link
-                key={s.label}
+                key={s.key}
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="icon-link"
-                aria-label={s.label}
+                aria-label={t(`contact.${s.key}`)}
               >
                 {s.icon}
               </Link>
@@ -125,7 +125,7 @@ export default function ContactePage() {
 
         <div className="mx-auto mt-16 max-w-md">
           <h2 className="brand-serif mb-6 text-center text-xl tracking-[0.12em]">
-            Program de lucru
+            {t("contact.hours")}
           </h2>
           <div className="border border-zinc-200 bg-[#EFEBEA] p-6">
             <table className="w-full text-sm">

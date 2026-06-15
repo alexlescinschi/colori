@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import AddToCartButton from "@/app/product/[slug]/AddToCartButton";
 import WishlistButton from "@/app/components/WishlistButton";
 import ProductRow from "@/app/components/ProductRow";
@@ -53,6 +54,7 @@ export default async function ProductPage({
   const { categorySlug, productSlug } = await params;
   const product = await getProduct(categorySlug, productSlug);
   const relatedProducts = await getRelatedProducts(categorySlug, productSlug);
+  const t = await getTranslations();
 
   if (!product) {
     notFound();
@@ -64,7 +66,7 @@ export default async function ProductPage({
     <div className="bg-[#F8F4F3] text-[#1A1A1A]">
       <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <nav className="mb-6 text-sm text-zinc-400">
-          <Link href="/" className="hover:text-[#1A1A1A]">Acasa</Link>
+          <Link href="/" className="hover:text-[#1A1A1A]">{t("product.breadcrumb.home")}</Link>
           <span className="mx-2">/</span>
           <Link href={`/search?category=${categorySlug}`} className="hover:text-[#1A1A1A]">
             {product.category?.title || categorySlug}
@@ -77,22 +79,22 @@ export default async function ProductPage({
           <ProductGallery images={product.images || []} productTitle={product.title} />
 
           <div className="panel-surface p-6 md:p-8">
-            <p className="brand-serif text-xs font-semibold uppercase tracking-[0.22em] text-[#333F48]">COLORI LAB</p>
+            <p className="brand-serif text-xs font-semibold uppercase tracking-[0.22em] text-[#333F48]">{t("product.coloriLab")}</p>
             <h1 className="brand-serif mt-3 text-4xl tracking-[0.08em] text-[#1A1A1A] md:text-5xl">{product.title}</h1>
 
             <div className="mt-6 flex items-baseline gap-4">
-              <p className="text-3xl font-semibold text-[#1A1A1A] md:text-4xl">{product.price.toFixed(2)} MDL</p>
+              <p className="text-3xl font-semibold text-[#1A1A1A] md:text-4xl">{product.price.toFixed(2)} {t("common.mdl")}</p>
               {product.oldPrice && <p className="text-lg text-zinc-400 line-through">{product.oldPrice.toFixed(2)} MDL</p>}
             </div>
 
             <p className={`mt-3 text-sm ${inStock ? "text-emerald-600" : "text-red-600"}`}>
-              {inStock ? `In stoc (${product.stockQuantity} buc.)` : "Stoc epuizat"}
+              {inStock ? t("product.stock", { count: product.stockQuantity }) : t("product.outOfStock")}
             </p>
 
             <div className="mt-6 space-y-3 text-sm text-zinc-600">
-              <p>• Aderenta ridicata si rezistenta maxima.</p>
-              <p>• Formula testata pentru lucru profesional in salon.</p>
-              <p>• Textura uniforma pentru aplicare rapida.</p>
+              <p>{t("product.features.0")}</p>
+              <p>{t("product.features.1")}</p>
+              <p>{t("product.features.2")}</p>
             </div>
 
             <div className="mt-8 space-y-3">
@@ -111,7 +113,7 @@ export default async function ProductPage({
 
               <WishlistButton
                 variant="outline"
-                label="Adauga la wishlist"
+                label={t("product.addToWishlist")}
                 product={{
                   productId: product.id,
                   title: product.title,
@@ -122,23 +124,23 @@ export default async function ProductPage({
               />
             </div>
 
-            {product.sku && <p className="mt-6 text-xs uppercase tracking-[0.12em] text-zinc-400">SKU: {product.sku}</p>}
+            {product.sku && <p className="mt-6 text-xs uppercase tracking-[0.12em] text-zinc-400">{t("product.sku")} {product.sku}</p>}
           </div>
         </section>
 
         <section className="mt-8 grid gap-4 border-y border-zinc-200 py-4 text-sm text-zinc-600 md:grid-cols-3">
-          <div className="panel-surface p-4">Livrare rapida 24/48h</div>
-          <div className="panel-surface p-4">Retur simplu in 14 zile</div>
-          <div className="panel-surface p-4">Plati securizate 100%</div>
+          <div className="panel-surface p-4">{t("product.shipping")}</div>
+          <div className="panel-surface p-4">{t("product.returns")}</div>
+          <div className="panel-surface p-4">{t("product.securePayment")}</div>
         </section>
 
         <section className="mt-8 border border-zinc-200 bg-[#F8F4F3] p-6 md:p-8">
-          <h2 className="brand-serif text-2xl tracking-[0.1em] text-[#1A1A1A]">Descriere</h2>
+          <h2 className="brand-serif text-2xl tracking-[0.1em] text-[#1A1A1A]">{t("product.description")}</h2>
           {product.description ? (
             <div className="prose prose-slate mt-4 max-w-none text-zinc-600" dangerouslySetInnerHTML={{ __html: product.description }} />
           ) : (
             <p className="mt-4 leading-7 text-zinc-600">
-              Acest produs este ideal pentru tehnicienele care cauta performanta constanta si finisaj premium.
+              {t("product.fallbackDescription")}
             </p>
           )}
         </section>
@@ -157,7 +159,7 @@ export default async function ProductPage({
         <RecentlyViewed />
 
         <ProductRow
-          title="Din aceeasi categorie"
+          title={t("product.related")}
           products={relatedProducts.data.map((p) => ({
             id: p.id,
             slug: p.slug,

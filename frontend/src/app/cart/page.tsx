@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { CartItem } from "@/lib/strapi";
 import { getProductPath } from "@/lib/routes";
 
@@ -11,6 +12,7 @@ export default function CartPage() {
     if (typeof window === "undefined") return [];
     return JSON.parse(localStorage.getItem("cart") || "[]") as CartItem[];
   });
+  const t = useTranslations();
 
   const updateQuantity = (productId: number, quantity: number) => {
     if (quantity < 1) return;
@@ -34,13 +36,13 @@ export default function CartPage() {
   if (cart.length === 0) {
     return (
       <div className="mx-auto max-w-7xl px-4 py-24 text-center sm:px-6 lg:px-8">
-        <h1 className="brand-serif text-3xl tracking-[0.12em] text-[#1A1A1A]">Coșul este gol</h1>
-        <p className="mt-4 text-sm tracking-wide text-zinc-400">Adaugă produse în coș pentru a continua.</p>
+        <h1 className="brand-serif text-3xl tracking-[0.12em] text-[#1A1A1A]">{t("cart.emptyTitle")}</h1>
+        <p className="mt-4 text-sm tracking-wide text-zinc-400">{t("cart.emptyText")}</p>
         <Link
           href="/search"
           className="mt-8 inline-block bg-[#5e000e] px-8 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-[#7e1023]"
         >
-          Vezi produsele
+          {t("cart.viewProducts")}
         </Link>
       </div>
     );
@@ -49,7 +51,7 @@ export default function CartPage() {
   return (
     <div className="bg-[#F8F4F3] text-[#1A1A1A]">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <h1 className="brand-serif mb-10 text-3xl tracking-[0.12em] text-[#1A1A1A]">Coșul tău</h1>
+        <h1 className="brand-serif mb-10 text-3xl tracking-[0.12em] text-[#1A1A1A]">{t("cart.title")}</h1>
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div className="space-y-4 lg:col-span-2">
@@ -68,7 +70,7 @@ export default function CartPage() {
                     />
                   ) : (
                     <div className="flex h-full w-full items-center justify-center text-xs text-zinc-400">
-                      Fără imagine
+                      {t("cart.noImage")}
                     </div>
                   )}
                 </div>
@@ -82,7 +84,7 @@ export default function CartPage() {
                       {item.titleSnapshot}
                     </Link>
                     <p className="mt-1 text-sm font-bold text-[#5e000e]">
-                      {item.priceSnapshot.toFixed(2)} MDL
+                      {item.priceSnapshot.toFixed(2)} {t("common.mdl")}
                     </p>
                   </div>
 
@@ -109,14 +111,14 @@ export default function CartPage() {
                       onClick={() => removeItem(item.productId)}
                       className="text-xs uppercase tracking-wider text-zinc-400 transition hover:text-red-600"
                     >
-                      Șterge
+                      {t("cart.delete")}
                     </button>
                   </div>
                 </div>
 
                 <div className="flex items-center text-right">
                   <p className="text-base font-bold text-zinc-800">
-                    {(item.priceSnapshot * item.quantity).toFixed(2)} MDL
+                    {(item.priceSnapshot * item.quantity).toFixed(2)} {t("common.mdl")}
                   </p>
                 </div>
               </div>
@@ -124,23 +126,23 @@ export default function CartPage() {
           </div>
 
           <div className="h-fit border border-zinc-200 bg-[#EFEBEA] p-6">
-            <h2 className="brand-serif mb-6 text-xl tracking-[0.1em] text-[#1A1A1A]">Sumar</h2>
+            <h2 className="brand-serif mb-6 text-xl tracking-[0.1em] text-[#1A1A1A]">{t("cart.summary")}</h2>
 
             <div className="space-y-3 text-sm text-zinc-600">
               <div className="flex justify-between">
-                <span>Subtotal</span>
-                <span>{total.toFixed(2)} MDL</span>
+                <span>{t("cart.subtotal")}</span>
+                <span>{total.toFixed(2)} {t("common.mdl")}</span>
               </div>
               <div className="flex justify-between">
-                <span>Livrare</span>
-                <span className="text-zinc-400">Se calculează</span>
+                <span>{t("cart.shipping")}</span>
+                <span className="text-zinc-400">{t("cart.shippingCalc")}</span>
               </div>
             </div>
 
             <div className="my-6 border-t border-zinc-200 pt-6">
               <div className="flex justify-between text-lg font-bold text-[#1A1A1A]">
-                <span>Total</span>
-                <span>{total.toFixed(2)} MDL</span>
+                <span>{t("cart.total")}</span>
+                <span>{total.toFixed(2)} {t("common.mdl")}</span>
               </div>
             </div>
 
@@ -148,14 +150,14 @@ export default function CartPage() {
               href="/checkout"
               className="block w-full bg-[#5e000e] px-6 py-3 text-center text-xs font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-[#7e1023]"
             >
-              Finalizează comanda
+              {t("cart.checkout")}
             </Link>
 
             <Link
               href="/search"
               className="mt-3 block w-full text-center text-xs uppercase tracking-wider text-zinc-400 transition hover:text-[#1A1A1A]"
             >
-              Continuă cumpărăturile
+              {t("cart.continueShopping")}
             </Link>
           </div>
         </div>

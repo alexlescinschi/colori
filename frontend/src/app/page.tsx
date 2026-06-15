@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import WishlistButton from "@/app/components/WishlistButton";
 import { fetchAPI, Category, Product, StrapiResponse } from "@/lib/strapi";
 import { getCategoryPath, getProductPathFromProduct } from "@/lib/routes";
@@ -95,6 +96,7 @@ export default async function Home({
   const categories = await getCategories();
   const featuredProducts = await getFeaturedProducts();
   const catalogProducts = await getCatalogProducts(filters);
+  const t = await getTranslations();
 
   return (
     <div className="bg-[#F8F4F3] text-[#1A1A1A]">
@@ -103,26 +105,26 @@ export default async function Home({
           <aside className="panel-surface hidden p-7 lg:block">
             <p className="brand-serif text-4xl tracking-[0.32em] text-[#1A1A1A]">COLORI</p>
             <p className="mt-5 text-sm leading-7 text-zinc-600">
-              Nail Color Lab pentru tehniciene care vor rezultate premium. Formula profesionala, pigment intens, rezistenta ridicata.
+              {t("home.sidebar.description")}
             </p>
 
-            <h3 className="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">Paleta</h3>
+            <h3 className="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">{t("home.sidebar.palette")}</h3>
             <div className="mt-4 space-y-3 text-sm text-zinc-600">
-              <div className="flex items-center gap-3"><span className="h-8 w-8 border border-zinc-400 bg-zinc-300" /> Gri #BFBFBF</div>
-              <div className="flex items-center gap-3"><span className="h-8 w-8 border border-zinc-300 bg-[#5e000e]" /> Rosu Cires #5E000E</div>
-              <div className="flex items-center gap-3"><span className="h-8 w-8 border border-zinc-300 bg-zinc-100" /> Alb #FFFFFF</div>
-              <div className="flex items-center gap-3"><span className="h-8 w-8 border border-zinc-300 bg-black" /> Negru #0A0A0A</div>
+              <div className="flex items-center gap-3"><span className="h-8 w-8 border border-zinc-400 bg-zinc-300" /> {t("home.sidebar.colors.grey")}</div>
+              <div className="flex items-center gap-3"><span className="h-8 w-8 border border-zinc-300 bg-[#5e000e]" /> {t("home.sidebar.colors.red")}</div>
+              <div className="flex items-center gap-3"><span className="h-8 w-8 border border-zinc-300 bg-zinc-100" /> {t("home.sidebar.colors.white")}</div>
+              <div className="flex items-center gap-3"><span className="h-8 w-8 border border-zinc-300 bg-black" /> {t("home.sidebar.colors.black")}</div>
             </div>
           </aside>
 
           <div className="grid gap-6 lg:grid-cols-[1fr_260px]">
             <article className="panel-surface overflow-hidden p-8 md:p-12">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#d7b4bb]">Profesional</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#d7b4bb]">{t("home.hero.label")}</p>
               <h1 className="brand-serif mt-3 text-4xl leading-tight tracking-[0.06em] text-[#1A1A1A] md:text-6xl">
-                Nail Color Lab
+                {t("home.hero.title")}
               </h1>
               <p className="mt-5 max-w-xl text-base leading-7 text-zinc-600 md:text-lg">
-                Produse profesionale pentru tehnicienele care doresc rezultate perfecte, cu aspect elegant si durabilitate maxima.
+                {t("home.hero.description")}
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -130,30 +132,30 @@ export default async function Home({
                   href="/search"
                   className="inline-flex items-center justify-center bg-[#5e000e] px-7 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-[#7e1023]"
                 >
-                  Descopera produsele
+                  {t("home.hero.cta")}
                 </Link>
                 <Link
                   href="/search?q=gel"
                   className="inline-flex items-center justify-center border border-zinc-400 px-7 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-zinc-800 transition hover:border-zinc-300"
                 >
-                  Vezi bestseller
+                  {t("home.hero.secondary")}
                 </Link>
               </div>
             </article>
 
             <div className="grid gap-4">
               <article className="panel-surface p-6">
-                <h3 className="brand-serif text-2xl tracking-[0.12em] text-[#1A1A1A]">De ce COLORI</h3>
+                <h3 className="brand-serif text-2xl tracking-[0.12em] text-[#1A1A1A]">{t("home.why.title")}</h3>
                 <ul className="mt-5 space-y-3 text-sm text-zinc-600">
-                  <li className="flex items-start gap-2"><span className="mt-1 h-2 w-2 rounded-full bg-[#5e000e]" /> Formule avansate si siguranta garantata.</li>
-                  <li className="flex items-start gap-2"><span className="mt-1 h-2 w-2 rounded-full bg-[#5e000e]" /> Testate pe cliente reale.</li>
-                  <li className="flex items-start gap-2"><span className="mt-1 h-2 w-2 rounded-full bg-[#5e000e]" /> Pigmenti intensi si rezistenta ridicata.</li>
+                  <li className="flex items-start gap-2"><span className="mt-1 h-2 w-2 rounded-full bg-[#5e000e]" /> {t("home.why.items.0")}</li>
+                  <li className="flex items-start gap-2"><span className="mt-1 h-2 w-2 rounded-full bg-[#5e000e]" /> {t("home.why.items.1")}</li>
+                  <li className="flex items-start gap-2"><span className="mt-1 h-2 w-2 rounded-full bg-[#5e000e]" /> {t("home.why.items.2")}</li>
                 </ul>
               </article>
               <article className="panel-surface p-6">
-                <h3 className="brand-serif text-2xl tracking-[0.12em] text-[#1A1A1A]">Invata cu noi</h3>
+                <h3 className="brand-serif text-2xl tracking-[0.12em] text-[#1A1A1A]">{t("home.learn.title")}</h3>
                 <p className="mt-3 text-sm leading-6 text-zinc-600">
-                  Transforma pasiunea intr-o profesie. Cursuri pentru incepatori si avansati.
+                  {t("home.learn.description")}
                 </p>
               </article>
             </div>
@@ -167,41 +169,41 @@ export default async function Home({
             <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-[#5e000e]" fill="none" stroke="currentColor">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            <span className="text-xs uppercase tracking-[0.16em] text-zinc-600">Calitate profesională</span>
+            <span className="text-xs uppercase tracking-[0.16em] text-zinc-600">{t("home.features.quality")}</span>
           </div>
           <div className="flex items-center gap-3">
             <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-[#5e000e]" fill="none" stroke="currentColor">
               <circle cx="12" cy="12" r="10" strokeWidth="1.5" />
               <path d="m8 12 3 3 5-5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            <span className="text-xs uppercase tracking-[0.16em] text-zinc-600">Testate pe cliente reale</span>
+            <span className="text-xs uppercase tracking-[0.16em] text-zinc-600">{t("home.features.tested")}</span>
           </div>
           <div className="flex items-center gap-3">
             <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-[#5e000e]" fill="currentColor">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
             </svg>
-            <span className="text-xs uppercase tracking-[0.16em] text-zinc-600">Create de profesioniști</span>
+            <span className="text-xs uppercase tracking-[0.16em] text-zinc-600">{t("home.features.created")}</span>
           </div>
           <div className="flex items-center gap-3">
             <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-[#5e000e]" fill="none" stroke="currentColor">
               <rect x="3" y="11" width="18" height="10" rx="2" strokeWidth="1.5" />
               <path d="M8 11V7a4 4 0 0 1 8 0v4" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
-            <span className="text-xs uppercase tracking-[0.16em] text-zinc-600">Plăți 100% securizate</span>
+            <span className="text-xs uppercase tracking-[0.16em] text-zinc-600">{t("home.features.payments")}</span>
           </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="mb-8 flex items-center justify-between gap-4">
-          <h2 className="brand-serif text-3xl tracking-[0.12em] text-[#1A1A1A] md:text-4xl">Cele mai indragite produse</h2>
+          <h2 className="brand-serif text-3xl tracking-[0.12em] text-[#1A1A1A] md:text-4xl">{t("home.featured.title")}</h2>
           <Link href="/search" className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-600 hover:text-[#1A1A1A]">
-            Vezi toate
+            {t("home.featured.viewAll")}
           </Link>
         </div>
 
         {featuredProducts.data.length === 0 ? (
-          <p className="rounded border border-zinc-200 bg-zinc-100/50 p-6 text-zinc-400">Nu exista produse recomandate momentan.</p>
+          <p className="rounded border border-zinc-200 bg-zinc-100/50 p-6 text-zinc-400">{t("home.featured.empty")}</p>
         ) : (
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
             {featuredProducts.data.map((product) => (
@@ -237,14 +239,14 @@ export default async function Home({
                   <h3 className="mt-4 min-h-12 text-sm font-semibold uppercase tracking-[0.08em] text-zinc-800">
                     {product.title}
                   </h3>
-                  <p className="mt-2 text-lg font-semibold text-[#d7b4bb]">{product.price.toFixed(2)} MDL</p>
+                  <p className="mt-2 text-lg font-semibold text-[#d7b4bb]">{product.price.toFixed(2)} {t("common.mdl")}</p>
                 </Link>
 
                 <Link
                   href={getProductPathFromProduct(product)}
                   className="mt-4 inline-flex w-full items-center justify-center bg-[#5e000e] px-3 py-2 text-xs font-semibold uppercase tracking-[0.13em] text-white transition hover:bg-[#7e1023]"
                 >
-                  Vezi produsul
+                  {t("home.featured.viewProduct")}
                 </Link>
               </article>
             ))}
@@ -255,8 +257,8 @@ export default async function Home({
       <section className="border-y border-zinc-200 bg-[#F8F4F3] py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-6 flex items-center justify-between gap-3">
-            <h2 className="brand-serif text-3xl tracking-[0.12em] text-[#1A1A1A]">Catalog</h2>
-            <p className="text-xs uppercase tracking-[0.14em] text-zinc-400">Filtrare si sortare</p>
+            <h2 className="brand-serif text-3xl tracking-[0.12em] text-[#1A1A1A]">{t("home.catalog.title")}</h2>
+            <p className="text-xs uppercase tracking-[0.14em] text-zinc-400">{t("home.catalog.filter")}</p>
           </div>
 
           <form action="/" className="grid gap-3 rounded border border-zinc-200 bg-black/5 p-4 md:grid-cols-[1.2fr_1fr_1fr_auto]">
@@ -264,7 +266,7 @@ export default async function Home({
               type="text"
               name="q"
               defaultValue={filters.q || ""}
-              placeholder="Cauta produs"
+              placeholder={t("home.catalog.searchPlaceholder")}
               className="border border-zinc-300 bg-[#F8F4F3] px-4 py-3 text-sm text-[#1A1A1A]"
             />
 
@@ -273,7 +275,7 @@ export default async function Home({
               defaultValue={filters.category || ""}
               className="border border-zinc-300 bg-[#F8F4F3] px-4 py-3 text-sm text-[#1A1A1A]"
             >
-              <option value="">Toate categoriile</option>
+              <option value="">{t("home.catalog.allCategories")}</option>
               {categories.data.map((category) => (
                 <option key={category.id} value={category.slug}>{category.title}</option>
               ))}
@@ -284,22 +286,22 @@ export default async function Home({
               defaultValue={filters.sort || "name-asc"}
               className="border border-zinc-300 bg-[#F8F4F3] px-4 py-3 text-sm text-[#1A1A1A]"
             >
-              <option value="name-asc">Nume A-Z</option>
-              <option value="name-desc">Nume Z-A</option>
-              <option value="price-asc">Pret crescator</option>
-              <option value="price-desc">Pret descrescator</option>
+              <option value="name-asc">{t("home.catalog.sortNameAsc")}</option>
+              <option value="name-desc">{t("home.catalog.sortNameDesc")}</option>
+              <option value="price-asc">{t("home.catalog.sortPriceAsc")}</option>
+              <option value="price-desc">{t("home.catalog.sortPriceDesc")}</option>
             </select>
 
             <button
               type="submit"
               className="bg-[#5e000e] px-6 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-[#7e1023]"
             >
-              Aplica
+              {t("home.catalog.apply")}
             </button>
           </form>
 
           {catalogProducts.data.length === 0 ? (
-            <p className="mt-6 rounded border border-zinc-200 bg-zinc-100/50 p-6 text-zinc-400">Nu exista produse pentru filtrul ales.</p>
+            <p className="mt-6 rounded border border-zinc-200 bg-zinc-100/50 p-6 text-zinc-400">{t("home.catalog.empty")}</p>
           ) : (
             <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
               {catalogProducts.data.map((product) => (
@@ -333,7 +335,7 @@ export default async function Home({
                       )}
                     </div>
                     <h3 className="mt-4 min-h-12 text-sm font-semibold uppercase tracking-[0.08em] text-zinc-800">{product.title}</h3>
-                    <p className="mt-2 text-lg font-semibold text-[#d7b4bb]">{product.price.toFixed(2)} MDL</p>
+                    <p className="mt-2 text-lg font-semibold text-[#d7b4bb]">{product.price.toFixed(2)} {t("common.mdl")}</p>
                   </Link>
                 </article>
               ))}
@@ -344,7 +346,7 @@ export default async function Home({
 
       <section className="border-t border-zinc-200 bg-[#F8F4F3] py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="brand-serif text-2xl tracking-[0.14em] text-[#1A1A1A]">Categorii</h2>
+          <h2 className="brand-serif text-2xl tracking-[0.14em] text-[#1A1A1A]">{t("home.categories.title")}</h2>
           <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
             {categories.data.map((category) => (
               <Link

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
 export default async function OrderConfirmationPage({
   searchParams,
@@ -6,6 +7,7 @@ export default async function OrderConfirmationPage({
   searchParams: Promise<{ order?: string }>;
 }) {
   const { order } = await searchParams;
+  const t = await getTranslations();
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-16 text-center sm:px-6 lg:px-8">
@@ -16,24 +18,24 @@ export default async function OrderConfirmationPage({
           </svg>
         </div>
 
-        <h1 className="brand-serif text-4xl tracking-[0.08em] text-[#1A1A1A]">Comanda plasata cu succes</h1>
+        <h1 className="brand-serif text-4xl tracking-[0.08em] text-[#1A1A1A]">{t("order.title")}</h1>
 
         {order && (
           <p className="mt-5 text-lg text-zinc-600">
-            Numar comanda: <span className="font-semibold text-[#d7b4bb]">{order}</span>
+            {t("order.orderNumber")} <span className="font-semibold text-[#d7b4bb]">{order}</span>
           </p>
         )}
 
         <p className="mx-auto mt-4 max-w-lg text-zinc-400">
-          Echipa COLORI va confirma comanda in cel mai scurt timp.
+          {t("order.info")}
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link href="/search" className="bg-[#5e000e] px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-[#7e1023]">
-            Continua cumparaturile
+            {t("order.continueShopping")}
           </Link>
-          <Link href="/" className="border border-zinc-300 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-zinc-800 transition hover:border-zinc-300">
-            Acasa
+          <Link href="/" className="border border-zinc-300 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-zinc-800 transition hover:border-zinc-400">
+            {t("order.backHome")}
           </Link>
         </div>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { CartItem } from "@/lib/strapi";
 import { getStrapiUrl } from "@/lib/auth";
 
@@ -20,6 +21,7 @@ interface AddToCartButtonProps {
 export default function AddToCartButton({ product, variant = "default" }: AddToCartButtonProps) {
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
+  const t = useTranslations();
 
   const inStock = product.stockQuantity > 0;
   const normalizedImageUrl =
@@ -35,18 +37,16 @@ export default function AddToCartButton({ product, variant = "default" }: AddToC
     const existingIndex = cart.findIndex((item) => item.productId === product.id);
     
     if (existingIndex >= 0) {
-      // Update quantity
       const newQty = cart[existingIndex].quantity + quantity;
       if (newQty <= product.stockQuantity) {
         cart[existingIndex].quantity = newQty;
       } else {
-        alert(`Stoc limitat: doar ${product.stockQuantity} buc. disponibile`);
+        alert(t("product.limitedAlert", { count: product.stockQuantity }));
         return;
       }
     } else {
-      // Add new item
       if (quantity > product.stockQuantity) {
-        alert(`Stoc limitat: doar ${product.stockQuantity} buc. disponibile`);
+        alert(t("product.limitedAlert", { count: product.stockQuantity }));
         return;
       }
       cart.push({
@@ -64,7 +64,6 @@ export default function AddToCartButton({ product, variant = "default" }: AddToC
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
     
-    // Trigger custom event for header update
     window.dispatchEvent(new Event("cartUpdated"));
   };
 
@@ -74,7 +73,7 @@ export default function AddToCartButton({ product, variant = "default" }: AddToC
         disabled
         className="w-full py-3 bg-zinc-800 text-zinc-400 rounded-lg cursor-not-allowed"
       >
-        Stoc epuizat
+        {t("product.outOfStock")}
       </button>
     );
   }
@@ -115,7 +114,7 @@ export default function AddToCartButton({ product, variant = "default" }: AddToC
         onClick={addToCart}
         className={added ? "flex-1 py-3 bg-emerald-700 text-white font-semibold tracking-[0.08em] uppercase" : addButtonClass}
       >
-        {added ? "Adaugat" : "Adauga in cos"}
+        {added ? t("product.added") : t("product.addToCart")}
       </button>
     </div>
   );

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import WishlistButton from "@/app/components/WishlistButton";
 import { getStrapiUrl } from "@/lib/auth";
 import { getProductPathFromProduct } from "@/lib/routes";
@@ -81,23 +82,24 @@ export default async function SearchPage({
   const filters = await searchParams;
   const categories = await getCategories();
   const products = await getCatalogProducts(filters);
+  const t = await getTranslations();
 
   return (
     <div className="bg-[#F8F4F3] text-[#1A1A1A]">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <h1 className="brand-serif text-4xl tracking-[0.12em] text-[#1A1A1A]">Catalog Produse</h1>
-        <p className="mt-2 text-sm text-zinc-400">Filtreaza in stanga si exploreaza lista de produse in dreapta.</p>
+        <h1 className="brand-serif text-4xl tracking-[0.12em] text-[#1A1A1A]">{t("search.title")}</h1>
+        <p className="mt-2 text-sm text-zinc-400">{t("search.subtitle")}</p>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[280px_1fr]">
           <aside className="panel-surface h-fit p-5 lg:sticky lg:top-28">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">Filtre</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">{t("search.filters")}</p>
 
             <form action="/search" className="mt-4 space-y-3">
               <input
                 type="text"
                 name="q"
                 defaultValue={filters.q || ""}
-                placeholder="Cauta produs"
+                placeholder={t("search.searchPlaceholder")}
                 className="w-full border border-zinc-300 bg-[#F8F4F3] px-4 py-3 text-sm text-[#1A1A1A]"
               />
 
@@ -106,7 +108,7 @@ export default async function SearchPage({
                 defaultValue={filters.category || ""}
                 className="w-full border border-zinc-300 bg-[#F8F4F3] px-4 py-3 text-sm text-[#1A1A1A]"
               >
-                <option value="">Toate categoriile</option>
+                <option value="">{t("search.allCategories")}</option>
                 {categories.data.map((category) => (
                   <option key={category.id} value={category.slug}>{category.title}</option>
                 ))}
@@ -117,10 +119,10 @@ export default async function SearchPage({
                 defaultValue={filters.sort || "name-asc"}
                 className="w-full border border-zinc-300 bg-[#F8F4F3] px-4 py-3 text-sm text-[#1A1A1A]"
               >
-                <option value="name-asc">Nume A-Z</option>
-                <option value="name-desc">Nume Z-A</option>
-                <option value="price-asc">Pret crescator</option>
-                <option value="price-desc">Pret descrescator</option>
+                <option value="name-asc">{t("search.sortNameAsc")}</option>
+                <option value="name-desc">{t("search.sortNameDesc")}</option>
+                <option value="price-asc">{t("search.sortPriceAsc")}</option>
+                <option value="price-desc">{t("search.sortPriceDesc")}</option>
               </select>
 
               <div className="flex gap-2">
@@ -128,13 +130,13 @@ export default async function SearchPage({
                   type="submit"
                   className="flex-1 bg-[#5e000e] px-4 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-[#7e1023]"
                 >
-                  Aplica
+                  {t("search.apply")}
                 </button>
                 <Link
                   href="/search"
                   className="inline-flex items-center border border-zinc-300 px-4 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-zinc-700"
                 >
-                  Reset
+                  {t("search.reset")}
                 </Link>
               </div>
             </form>
@@ -142,11 +144,11 @@ export default async function SearchPage({
 
           <section>
             <div className="mb-4 text-xs uppercase tracking-[0.14em] text-zinc-400">
-              {products.data.length} produse gasite
+              {t("search.results", { count: products.data.length })}
             </div>
 
             {products.data.length === 0 ? (
-              <p className="rounded border border-zinc-200 bg-zinc-100/50 p-6 text-zinc-400">Nu exista produse pentru filtrul selectat.</p>
+              <p className="rounded border border-zinc-200 bg-zinc-100/50 p-6 text-zinc-400">{t("search.empty")}</p>
             ) : (
               <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
                 {products.data.map((product) => (
@@ -182,7 +184,7 @@ export default async function SearchPage({
                       </div>
 
                       <h3 className="mt-4 min-h-12 text-sm font-semibold uppercase tracking-[0.08em] text-zinc-800">{product.title}</h3>
-                      <p className="mt-2 text-lg font-semibold text-[#d7b4bb]">{product.price.toFixed(2)} MDL</p>
+                      <p className="mt-2 text-lg font-semibold text-[#d7b4bb]">{product.price.toFixed(2)} {t("common.mdl")}</p>
                     </Link>
                   </article>
                 ))}
