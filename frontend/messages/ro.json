@@ -1,0 +1,263 @@
+{
+  "layout": {
+    "title": "COLORI - Magazin Online",
+    "description": "Produse de calitate pentru casa ta"
+  },
+  "header": {
+    "announcement": "Livrare gratuita pentru comenzi peste 299 MDL",
+    "menuLabel": "Meniu",
+    "nav": {
+      "home": "Acasă",
+      "products": "Produse",
+      "about": "Despre noi",
+      "academy": "Academie",
+      "contact": "Contacte"
+    },
+    "account": "Contul meu",
+    "wishlist": "Favorite",
+    "cart": "Cos",
+    "language": "Limba"
+  },
+  "footer": {
+    "description": "Produse profesionale pentru manichiura si pedichiura, livrate rapid in toata Moldova.",
+    "shop": "Shop",
+    "allProducts": "Toate produsele",
+    "categories": "Categorii",
+    "favorites": "Favorite",
+    "cart": "Cos",
+    "info": "Informatii",
+    "myAccount": "Contul meu",
+    "phone": "+373 600 00 000",
+    "email": "contact@colori.md",
+    "support": "Suport",
+    "hours": "Program: Luni - Vineri, 09:00 - 18:00",
+    "returns": "Retur simplu in 14 zile.",
+    "security": "Plati securizate si comenzi procesate manual de echipa COLORI.",
+    "copyright": "© {year} COLORI. Toate drepturile rezervate."
+  },
+  "home": {
+    "sidebar": {
+      "title": "COLORI",
+      "description": "Nail Color Lab pentru tehniciene care vor rezultate premium. Formula profesionala, pigment intens, rezistenta ridicata.",
+      "palette": "Paleta",
+      "colors": {
+        "grey": "Gri #BFBFBF",
+        "red": "Rosu Cires #5E000E",
+        "white": "Alb #FFFFFF",
+        "black": "Negru #0A0A0A"
+      }
+    },
+    "hero": {
+      "label": "Profesional",
+      "title": "Nail Color Lab",
+      "description": "Produse profesionale pentru tehnicienele care doresc rezultate perfecte, cu aspect elegant si durabilitate maxima.",
+      "cta": "Descopera produsele",
+      "secondary": "Vezi bestseller"
+    },
+    "why": {
+      "title": "De ce COLORI",
+      "items": [
+        "Formule avansate si siguranta garantata.",
+        "Testate pe cliente reale.",
+        "Pigmenti intensi si rezistenta ridicata."
+      ]
+    },
+    "learn": {
+      "title": "Invata cu noi",
+      "description": "Transforma pasiunea intr-o profesie. Cursuri pentru incepatori si avansati."
+    },
+    "features": {
+      "quality": "Calitate profesională",
+      "tested": "Testate pe cliente reale",
+      "created": "Create de profesioniști",
+      "payments": "Plăți 100% securizate"
+    },
+    "featured": {
+      "title": "Cele mai indragite produse",
+      "viewAll": "Vezi toate",
+      "empty": "Nu exista produse recomandate momentan.",
+      "viewProduct": "Vezi produsul"
+    },
+    "catalog": {
+      "title": "Catalog",
+      "filter": "Filtrare si sortare",
+      "searchPlaceholder": "Cauta produs",
+      "allCategories": "Toate categoriile",
+      "sortNameAsc": "Nume A-Z",
+      "sortNameDesc": "Nume Z-A",
+      "sortPriceAsc": "Pret crescator",
+      "sortPriceDesc": "Pret descrescator",
+      "apply": "Aplica",
+      "empty": "Nu exista produse pentru filtrul ales."
+    },
+    "categories": {
+      "title": "Categorii"
+    }
+  },
+  "cart": {
+    "emptyTitle": "Coșul este gol",
+    "emptyText": "Adaugă produse în coș pentru a continua.",
+    "viewProducts": "Vezi produsele",
+    "title": "Coșul tău",
+    "noImage": "Fără imagine",
+    "delete": "Șterge",
+    "summary": "Sumar",
+    "subtotal": "Subtotal",
+    "shipping": "Livrare",
+    "shippingCalc": "Se calculează",
+    "total": "Total",
+    "checkout": "Finalizează comanda",
+    "continueShopping": "Continuă cumpărăturile"
+  },
+  "checkout": {
+    "loading": "Se încarcă...",
+    "errors": {
+      "required": "Completează toate câmpurile obligatorii",
+      "email": "Adresa de email nu este validă",
+      "phone": "Numărul de telefon nu este valid",
+      "generic": "Eroare la plasarea comenzii"
+    },
+    "title": "Finalizează comanda",
+    "form": {
+      "name": "Nume și prenume *",
+      "namePlaceholder": "Ex: Ion Popescu",
+      "email": "Email *",
+      "emailPlaceholder": "exemplu@email.com",
+      "phone": "Telefon *",
+      "phonePlaceholder": "+373 69 123 456",
+      "address": "Adresă de livrare *",
+      "addressPlaceholder": "Strada, număr, bloc, apartament",
+      "city": "Oraș *",
+      "cityPlaceholder": "Chișinău",
+      "payment": "Metodă de plată",
+      "cash": "Plată la livrare (cash)",
+      "transfer": "Transfer bancar"
+    },
+    "submit": "Plasează comanda ({total} MDL)",
+    "processing": "Se procesează...",
+    "summary": "Sumar comandă",
+    "total": "Total"
+  },
+  "account": {
+    "title": "Contul meu",
+    "login": "Login",
+    "register": "Register",
+    "emailPlaceholder": "Email sau username",
+    "passwordPlaceholder": "Parola",
+    "loginBtn": "Intra in cont",
+    "registerBtn": "Creeaza cont",
+    "processing": "Se proceseaza",
+    "usernamePlaceholder": "Username",
+    "registerEmailPlaceholder": "Email",
+    "registerPasswordPlaceholder": "Parola",
+    "info": "Autentificarea iti activeaza wishlist server-side. Produsele favorite raman salvate pe contul tau.",
+    "loggedInAs": "Conectat ca",
+    "logout": "Logout",
+    "wishlistTitle": "Wishlist (server)",
+    "wishlistEmpty": "Nu ai produse favorite pe cont."
+  },
+  "wishlist": {
+    "title": "Favorite",
+    "empty": "Nu ai produse in favorite.",
+    "label": "Produs favorit",
+    "add": "Adauga la favorite",
+    "inWishlist": "In favorite"
+  },
+  "search": {
+    "title": "Catalog Produse",
+    "subtitle": "Filtreaza in stanga si exploreaza lista de produse in dreapta.",
+    "filters": "Filtre",
+    "searchPlaceholder": "Cauta produs",
+    "allCategories": "Toate categoriile",
+    "sortNameAsc": "Nume A-Z",
+    "sortNameDesc": "Nume Z-A",
+    "sortPriceAsc": "Pret crescator",
+    "sortPriceDesc": "Pret descrescator",
+    "apply": "Aplica",
+    "reset": "Reset",
+    "results": "{count} produse gasite",
+    "empty": "Nu exista produse pentru filtrul selectat."
+  },
+  "about": {
+    "title": "Despre Noi",
+    "sections": {
+      "who": "Cine suntem",
+      "beginnings": "Începuturile",
+      "idea": "Ideea",
+      "reality": "Realitatea noastră",
+      "why": "De ce COLORI"
+    },
+    "whoText": "Suntem Alex și Elena, un cuplu din Republica Moldova care a transformat pasiunea pentru unghii într-un business înfloritor. Totul a început când Elena, pe atunci studentă, a urmat un curs de manichiură și a descoperit că aceasta este chemarea ei.",
+    "beginningsText": "În 2020, Elena și-a deschis propria activitate, iar în scurt timp a creat un cont de Instagram pentru a-și împărtăși lucrările. Cererile pentru recomandări de produse au început să curgă, iar împreună cu Alex au decis să transforme această nevoie într-un magazin online.",
+    "ideaText": "Într-o seară, la cină, Alex a venit cu ideea: să creăm un magazin online unde manichiuriștii să găsească produse profesionale testate și verificate de noi. Am pornit la drum, am găsit furnizori de încredere și am construit COLORI — un nume care reflectă esența meseriei noastre.",
+    "realityText": "Astăzi, COLORI înseamnă mult mai mult decât un magazin. Am creat o comunitate de profesioniști care împărtășesc aceeași pasiune. Fiecare produs din catalog este ales cu grijă, testat și aprobat de echipa noastră.",
+    "whyText": "Pentru că fiecare detaliu contează. De la formula fiecărui gel până la ambalaj și livrare — totul este gândit pentru a oferi cea mai bună experiență. Sprijinul vostru ne motivează să facem mereu mai bine.",
+    "cta": "Descoperă produsele noastre"
+  },
+  "contact": {
+    "title": "Contacte",
+    "subtitle": "Suntem aici pentru tine. Alege metoda preferată.",
+    "phone": "Telefon",
+    "phoneValue": "+373 69 123 456",
+    "whatsapp": "WhatsApp",
+    "whatsappValue": "Scrie-ne pe WhatsApp",
+    "email": "Email",
+    "emailValue": "hello@colori.md",
+    "follow": "Urmărește-ne",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "tiktok": "TikTok",
+    "hours": "Program de lucru",
+    "hoursWeek": "Luni — Vineri",
+    "hoursWeekTime": "09:00 — 18:00",
+    "hoursSat": "Sâmbătă",
+    "hoursSatTime": "10:00 — 15:00",
+    "hoursSun": "Duminică",
+    "hoursSunTime": "Închis"
+  },
+  "order": {
+    "title": "Comanda plasata cu succes",
+    "orderNumber": "Numar comanda:",
+    "info": "Echipa COLORI va confirma comanda in cel mai scurt timp.",
+    "continueShopping": "Continua cumparaturile",
+    "backHome": "Acasa"
+  },
+  "product": {
+    "breadcrumb": {
+      "home": "Acasa"
+    },
+    "coloriLab": "COLORI LAB",
+    "stock": "In stoc ({count} buc.)",
+    "outOfStock": "Stoc epuizat",
+    "stockLimited": "Stoc limitat",
+    "limitedAlert": "Stoc limitat: doar {count} buc. disponibile",
+    "features": [
+      "• Aderenta ridicata si rezistenta maxima.",
+      "• Formula testata pentru lucru profesional in salon.",
+      "• Textura uniforma pentru aplicare rapida."
+    ],
+    "addToWishlist": "Adauga la wishlist",
+    "sku": "SKU:",
+    "shipping": "Livrare rapida 24/48h",
+    "returns": "Retur simplu in 14 zile",
+    "securePayment": "Plati securizate 100%",
+    "description": "Descriere",
+    "fallbackDescription": "Acest produs este ideal pentru tehnicienele care cauta performanta constanta si finisaj premium.",
+    "related": "Din aceeasi categorie",
+    "addToCart": "Adauga in cos",
+    "added": "Adaugat",
+    "recentlyViewed": "Vazute recent",
+    "gallery": {
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out"
+    }
+  },
+  "category": {
+    "productCount": "{count} produs",
+    "productCountPlural": "{count} produse",
+    "empty": "Nu exista produse in aceasta categorie inca."
+  },
+  "common": {
+    "mdl": "MDL"
+  }
+}

@@ -1,0 +1,263 @@
+{
+  "layout": {
+    "title": "COLORI - Negozio Online",
+    "description": "Prodotti di qualità per la tua casa"
+  },
+  "header": {
+    "announcement": "Spedizione gratuita per ordini oltre 299 MDL",
+    "menuLabel": "Menu",
+    "nav": {
+      "home": "Home",
+      "products": "Prodotti",
+      "about": "Chi siamo",
+      "academy": "Accademia",
+      "contact": "Contatti"
+    },
+    "account": "Il mio account",
+    "wishlist": "Preferiti",
+    "cart": "Carrello",
+    "language": "Lingua"
+  },
+  "footer": {
+    "description": "Prodotti professionali per manicure e pedicure, spediti rapidamente in tutta la Moldova.",
+    "shop": "Shop",
+    "allProducts": "Tutti i prodotti",
+    "categories": "Categorie",
+    "favorites": "Preferiti",
+    "cart": "Carrello",
+    "info": "Informazioni",
+    "myAccount": "Il mio account",
+    "phone": "+373 600 00 000",
+    "email": "contact@colori.md",
+    "support": "Supporto",
+    "hours": "Orario: Lun - Ven, 09:00 - 18:00",
+    "returns": "Reso facile in 14 giorni.",
+    "security": "Pagamenti sicuri e ordini elaborati manualmente dal team COLORI.",
+    "copyright": "© {year} COLORI. Tutti i diritti riservati."
+  },
+  "home": {
+    "sidebar": {
+      "title": "COLORI",
+      "description": "Nail Color Lab per tecnici che vogliono risultati premium. Formula professionale, pigmento intenso, resistenza elevata.",
+      "palette": "Tavolozza",
+      "colors": {
+        "grey": "Grigio #BFBFBF",
+        "red": "Rosso Ciliegia #5E000E",
+        "white": "Bianco #FFFFFF",
+        "black": "Nero #0A0A0A"
+      }
+    },
+    "hero": {
+      "label": "Professionale",
+      "title": "Nail Color Lab",
+      "description": "Prodotti professionali per tecnici che desiderano risultati perfetti, con aspetto elegante e massima durata.",
+      "cta": "Scopri i prodotti",
+      "secondary": "Vedi bestseller"
+    },
+    "why": {
+      "title": "Perché COLORI",
+      "items": [
+        "Formule avanzate e sicurezza garantita.",
+        "Testati su clienti reali.",
+        "Pigmenti intensi e resistenza elevata."
+      ]
+    },
+    "learn": {
+      "title": "Impara con noi",
+      "description": "Trasforma la passione in una professione. Corsi per principianti e avanzati."
+    },
+    "features": {
+      "quality": "Qualità professionale",
+      "tested": "Testati su clienti reali",
+      "created": "Creati da professionisti",
+      "payments": "Pagamenti 100% sicuri"
+    },
+    "featured": {
+      "title": "I prodotti più amati",
+      "viewAll": "Vedi tutti",
+      "empty": "Nessun prodotto consigliato al momento.",
+      "viewProduct": "Vedi prodotto"
+    },
+    "catalog": {
+      "title": "Catalogo",
+      "filter": "Filtra e ordina",
+      "searchPlaceholder": "Cerca prodotto",
+      "allCategories": "Tutte le categorie",
+      "sortNameAsc": "Nome A-Z",
+      "sortNameDesc": "Nome Z-A",
+      "sortPriceAsc": "Prezzo crescente",
+      "sortPriceDesc": "Prezzo decrescente",
+      "apply": "Applica",
+      "empty": "Nessun prodotto per il filtro selezionato."
+    },
+    "categories": {
+      "title": "Categorie"
+    }
+  },
+  "cart": {
+    "emptyTitle": "Il carrello è vuoto",
+    "emptyText": "Aggiungi prodotti al carrello per continuare.",
+    "viewProducts": "Vedi prodotti",
+    "title": "Il tuo carrello",
+    "noImage": "Nessuna immagine",
+    "delete": "Elimina",
+    "summary": "Riepilogo",
+    "subtotal": "Subtotale",
+    "shipping": "Spedizione",
+    "shippingCalc": "Da calcolare",
+    "total": "Totale",
+    "checkout": "Finalizza ordine",
+    "continueShopping": "Continua acquisti"
+  },
+  "checkout": {
+    "loading": "Caricamento...",
+    "errors": {
+      "required": "Compila tutti i campi obbligatori",
+      "email": "L'indirizzo email non è valido",
+      "phone": "Il numero di telefono non è valido",
+      "generic": "Errore durante l'elaborazione dell'ordine"
+    },
+    "title": "Finalizza ordine",
+    "form": {
+      "name": "Nome e cognome *",
+      "namePlaceholder": "Es: Mario Rossi",
+      "email": "Email *",
+      "emailPlaceholder": "esempio@email.com",
+      "phone": "Telefono *",
+      "phonePlaceholder": "+39 123 456 789",
+      "address": "Indirizzo di spedizione *",
+      "addressPlaceholder": "Via, numero, civico, appartamento",
+      "city": "Città *",
+      "cityPlaceholder": "Milano",
+      "payment": "Metodo di pagamento",
+      "cash": "Pagamento alla consegna (contanti)",
+      "transfer": "Bonifico bancario"
+    },
+    "submit": "Effettua ordine ({total} MDL)",
+    "processing": "Elaborazione...",
+    "summary": "Riepilogo ordine",
+    "total": "Totale"
+  },
+  "account": {
+    "title": "Il mio account",
+    "login": "Login",
+    "register": "Registrati",
+    "emailPlaceholder": "Email o username",
+    "passwordPlaceholder": "Password",
+    "loginBtn": "Accedi",
+    "registerBtn": "Crea account",
+    "processing": "Elaborazione...",
+    "usernamePlaceholder": "Username",
+    "registerEmailPlaceholder": "Email",
+    "registerPasswordPlaceholder": "Password",
+    "info": "L'autenticazione attiva la wishlist lato server. I prodotti preferiti rimangono salvati sul tuo account.",
+    "loggedInAs": "Connesso come",
+    "logout": "Logout",
+    "wishlistTitle": "Wishlist (server)",
+    "wishlistEmpty": "Nessun prodotto preferito sul tuo account."
+  },
+  "wishlist": {
+    "title": "Preferiti",
+    "empty": "Nessun prodotto nei preferiti.",
+    "label": "Prodotto preferito",
+    "add": "Aggiungi ai preferiti",
+    "inWishlist": "Nei preferiti"
+  },
+  "search": {
+    "title": "Catalogo Prodotti",
+    "subtitle": "Filtra a sinistra ed esplora l'elenco dei prodotti a destra.",
+    "filters": "Filtri",
+    "searchPlaceholder": "Cerca prodotto",
+    "allCategories": "Tutte le categorie",
+    "sortNameAsc": "Nome A-Z",
+    "sortNameDesc": "Nome Z-A",
+    "sortPriceAsc": "Prezzo crescente",
+    "sortPriceDesc": "Prezzo decrescente",
+    "apply": "Applica",
+    "reset": "Reimposta",
+    "results": "{count} prodotti trovati",
+    "empty": "Nessun prodotto per il filtro selezionato."
+  },
+  "about": {
+    "title": "Chi Siamo",
+    "sections": {
+      "who": "Chi siamo",
+      "beginnings": "Gli inizi",
+      "idea": "L'idea",
+      "reality": "La nostra realtà",
+      "why": "Perché COLORI"
+    },
+    "whoText": "Siamo Alex ed Elena, una coppia della Repubblica Moldova che ha trasformato la passione per le unghie in un business fiorente. Tutto è iniziato quando Elena, allora studentessa, ha frequentato un corso di manicure e ha scoperto che questa era la sua vocazione.",
+    "beginningsText": "Nel 2020, Elena ha aperto la propria attività e in breve tempo ha creato un account Instagram per condividere i suoi lavori. Le richieste di consigli sui prodotti hanno iniziato ad arrivare e insieme ad Alex hanno deciso di trasformare questa esigenza in un negozio online.",
+    "ideaText": "Una sera, a cena, Alex ha avuto l'idea: creare un negozio online dove i nail artist possano trovare prodotti professionali testati e verificati da noi. Abbiamo iniziato il viaggio, trovato fornitori affidabili e costruito COLORI — un nome che riflette l'essenza del nostro mestiere.",
+    "realityText": "Oggi, COLORI significa molto più di un negozio. Abbiamo creato una comunità di professionisti che condividono la stessa passione. Ogni prodotto del catalogo è scelto con cura, testato e approvato dal nostro team.",
+    "whyText": "Perché ogni dettaglio conta. Dalla formula di ogni gel fino all'imballaggio e alla consegna — tutto è pensato per offrire la migliore esperienza. Il vostro supporto ci motiva a fare sempre meglio.",
+    "cta": "Scopri i nostri prodotti"
+  },
+  "contact": {
+    "title": "Contatti",
+    "subtitle": "Siamo qui per te. Scegli il metodo preferito.",
+    "phone": "Telefono",
+    "phoneValue": "+373 69 123 456",
+    "whatsapp": "WhatsApp",
+    "whatsappValue": "Scrivici su WhatsApp",
+    "email": "Email",
+    "emailValue": "hello@colori.md",
+    "follow": "Seguici",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "tiktok": "TikTok",
+    "hours": "Orario di lavoro",
+    "hoursWeek": "Lun — Ven",
+    "hoursWeekTime": "09:00 — 18:00",
+    "hoursSat": "Sabato",
+    "hoursSatTime": "10:00 — 15:00",
+    "hoursSun": "Domenica",
+    "hoursSunTime": "Chiuso"
+  },
+  "order": {
+    "title": "Ordine effettuato con successo",
+    "orderNumber": "Numero ordine:",
+    "info": "Il team COLORI confermerà l'ordine al più presto.",
+    "continueShopping": "Continua acquisti",
+    "backHome": "Home"
+  },
+  "product": {
+    "breadcrumb": {
+      "home": "Home"
+    },
+    "coloriLab": "COLORI LAB",
+    "stock": "In stock ({count} pz.)",
+    "outOfStock": "Esaurito",
+    "stockLimited": "Stock limitato",
+    "limitedAlert": "Stock limitato: solo {count} pz. disponibili",
+    "features": [
+      "• Elevata aderenza e resistenza massima.",
+      "• Formula testata per lavoro professionale in salone.",
+      "• Texture uniforme per applicazione rapida."
+    ],
+    "addToWishlist": "Aggiungi ai preferiti",
+    "sku": "SKU:",
+    "shipping": "Spedizione rapida 24/48h",
+    "returns": "Reso facile in 14 giorni",
+    "securePayment": "Pagamenti 100% sicuri",
+    "description": "Descrizione",
+    "fallbackDescription": "Questo prodotto è ideale per i tecnici che cercano prestazioni costanti e finitura premium.",
+    "related": "Della stessa categoria",
+    "addToCart": "Aggiungi al carrello",
+    "added": "Aggiunto",
+    "recentlyViewed": "Visti di recente",
+    "gallery": {
+      "zoomIn": "Zoom avanti",
+      "zoomOut": "Zoom indietro"
+    }
+  },
+  "category": {
+    "productCount": "{count} prodotto",
+    "productCountPlural": "{count} prodotti",
+    "empty": "Nessun prodotto in questa categoria ancora."
+  },
+  "common": {
+    "mdl": "MDL"
+  }
+}

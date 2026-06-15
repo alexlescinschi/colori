@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Montserrat } from "next/font/google";
+import { getLocale, getMessages } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -21,20 +23,25 @@ export const metadata: Metadata = {
   description: "Produse de calitate pentru casa ta",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
     <html
-      lang="ro"
+      lang={locale}
       className={`${playfair.variable} ${montserrat.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <NextIntlClientProvider messages={messages}>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </NextIntlClientProvider>
       </body>
     </html>
   );
