@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { getTranslations, getLocale } from "next-intl/server";
 import WishlistButton from "@/app/components/WishlistButton";
 import { getStrapiUrl } from "@/lib/auth";

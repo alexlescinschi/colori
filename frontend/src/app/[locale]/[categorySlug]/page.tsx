@@ -1,6 +1,6 @@
 import { fetchAPI, StrapiResponse, Category, Product } from "@/lib/strapi";
 import { getProductPath } from "@/lib/routes";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import { getTranslations, getLocale } from "next-intl/server";
 

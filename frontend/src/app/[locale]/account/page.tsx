@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { clearAuth, fetchMe, getStoredUser, login, register } from "@/lib/auth";
 import { getProductPath } from "@/lib/routes";
