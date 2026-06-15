@@ -1,6 +1,7 @@
 "use client";
 
 import { Link } from "@/i18n/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { CartItem } from "@/lib/strapi";
@@ -15,11 +16,6 @@ function getCartCountFromStorage() {
   return cart.reduce((sum, item) => sum + item.quantity, 0);
 }
 
-function setLocaleCookie(locale: string) {
-  document.cookie = `NEXT_LOCALE=${locale};path=/;max-age=31536000`;
-  window.location.reload();
-}
-
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartCount, setCartCount] = useState(() => getCartCountFromStorage());
@@ -27,6 +23,7 @@ export default function Header() {
   const [langOpen, setLangOpen] = useState(false);
   const t = useTranslations();
   const locale = useLocale();
+  const router = useRouter();
 
   useEffect(() => {
     const syncCounters = () => {
@@ -115,14 +112,14 @@ export default function Header() {
                 <div className="absolute right-0 top-full mt-1 w-20 rounded border border-zinc-200 bg-white shadow-lg z-10">
                   <button
                     type="button"
-                    onClick={() => { setLocaleCookie("ro"); setLangOpen(false); }}
+                    onClick={() => { router.replace("/", { locale: "ro" }); setLangOpen(false); }}
                     className={`block w-full px-3 py-2 text-left text-xs font-semibold uppercase tracking-wider transition hover:bg-zinc-100 ${locale === "ro" ? "text-[#5e000e]" : "text-zinc-600"}`}
                   >
                     RO
                   </button>
                   <button
                     type="button"
-                    onClick={() => { setLocaleCookie("it"); setLangOpen(false); }}
+                    onClick={() => { router.replace("/", { locale: "it" }); setLangOpen(false); }}
                     className={`block w-full px-3 py-2 text-left text-xs font-semibold uppercase tracking-wider transition hover:bg-zinc-100 ${locale === "it" ? "text-[#5e000e]" : "text-zinc-600"}`}
                   >
                     IT
