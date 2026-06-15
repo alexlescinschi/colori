@@ -1,7 +1,7 @@
 import { fetchAPI, StrapiResponse, Category, Product } from "@/lib/strapi";
 import { getProductPath } from "@/lib/routes";
 import { Link } from "@/i18n/navigation";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getTranslations, getLocale } from "next-intl/server";
 
 async function getCategory(slug: string, locale: string) {
@@ -42,6 +42,17 @@ export default async function CategoryPage({
   const category = await getCategory(categorySlug, locale);
 
   if (!category) {
+    // Fallback: try EN then redirect
+    const defaultCat = await getCategory(categorySlug, "en");
+    if (defaultCat) {
+      const localizedRes = await fetchAPI("/categories", {
+        locale,
+        params: { "filters[documentId][$eq]": defaultCat.documentId },
+      }) as StrapiResponse<Category>;
+      if (localizedRes.data[0]) {
+        redirect(`/${locale}/${localizedRes.data[0].slug}`);
+      }
+    }
     notFound();
   }
 

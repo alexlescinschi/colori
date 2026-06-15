@@ -16,7 +16,14 @@ function getCartCountFromStorage() {
 }
 
 function switchLocale(targetLocale: string) {
-  window.location.href = `/${targetLocale}`;
+  const path = window.location.pathname;
+  const segments = path.split("/").filter(Boolean);
+  if (["ro", "it"].includes(segments[0])) {
+    segments[0] = targetLocale;
+  } else {
+    segments.unshift(targetLocale);
+  }
+  window.location.href = "/" + segments.join("/");
 }
 
 export default function Header() {
