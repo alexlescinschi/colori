@@ -1,13 +1,28 @@
-import createMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
-import { routing } from "./i18n/routing";
 
-const intlMiddleware = createMiddleware(routing);
+const LOCALE_COOKIE = "NEXT_LOCALE";
+const LOCALE_HEADER = "x-next-intl-locale";
+const SUPPORTED = ["ro", "it"];
+const DEFAULT = "ro";
+
+function getPreferredLocale(request: NextRequest): string {
+  const cookie = request.cookies.get(LOCALE_COOKIE)?.value;
+  if (cookie && SUPPORTED.includes(cookie)) return cookie;
+
+  const acceptLang = request.headers.get("Accept-Language");
+  if (acceptLang) {
+    for (const lang of acceptLang.split(",")) {
+      const code = lang.split(";")[0]?.trim().slice(0, 2);
+      if (code && SUPPORTED.includes(code)) return code;
+    }
+  }
+
+  return DEFAULT;
+}
 
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Do not run middleware on static files or API routes
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
@@ -17,7 +32,17 @@ export default function middleware(request: NextRequest) {
     return;
   }
 
-  return intlMiddleware(request);
+  const locale = getPreferredLocale(request);
+
+  const response = NextResponse.next();
+  response.cookies.set(LOCALE_COOKIE, locale, {
+    path: "/",
+    maxAge: 31536000,
+    sameSite: "lax",
+  });
+  response.headers.set(LOCALE_HEADER, locale);
+
+  return response;
 }
 
 export const config = {
