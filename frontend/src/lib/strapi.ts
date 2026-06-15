@@ -2,10 +2,14 @@ const STRAPI_URL = process.env.STRAPI_URL || "http://localhost:1337";
 
 export async function fetchAPI(
   endpoint: string,
-  options?: RequestInit & { params?: Record<string, string> }
+  options?: RequestInit & { params?: Record<string, string>; locale?: string }
 ) {
   const url = new URL(`/api${endpoint}`, STRAPI_URL);
   
+  if (options?.locale) {
+    url.searchParams.append("locale", options.locale);
+  }
+
   if (options?.params) {
     Object.entries(options.params).forEach(([key, value]) => {
       url.searchParams.append(key, value);

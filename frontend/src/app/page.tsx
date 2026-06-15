@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import WishlistButton from "@/app/components/WishlistButton";
 import { fetchAPI, Category, Product, StrapiResponse } from "@/lib/strapi";
 import { getCategoryPath, getProductPathFromProduct } from "@/lib/routes";
@@ -12,10 +12,10 @@ interface HomeFilters {
   sort?: string;
 }
 
-async function getCategories() {
+async function getCategories(locale: string) {
   try {
     const res = await fetchAPI("/categories", {
-      params: { sort: "order:asc" },
+      params: { sort: "order:asc" }, locale,
     });
     return res as StrapiResponse<Category>;
   } catch {
@@ -23,14 +23,14 @@ async function getCategories() {
   }
 }
 
-async function getFeaturedProducts() {
+async function getFeaturedProducts(locale: string) {
   try {
     const res = await fetchAPI("/products", {
       params: {
         "filters[featured][$eq]": "true",
         "pagination[limit]": "24",
         populate: "category",
-      },
+      }, locale,
     });
 
     const data = res as StrapiResponse<Product>;
@@ -45,7 +45,7 @@ async function getFeaturedProducts() {
   }
 }
 
-async function getCatalogProducts(filters: HomeFilters) {
+async function getCatalogProducts(filters: HomeFilters, locale: string) {
   try {
     const params: Record<string, string> = {
       "pagination[limit]": "24",
@@ -76,7 +76,7 @@ async function getCatalogProducts(filters: HomeFilters) {
         break;
     }
 
-    const res = await fetchAPI("/products", { params });
+    const res = await fetchAPI("/products", { params, locale });
     const data = res as StrapiResponse<Product>;
     return {
       ...data,
@@ -93,10 +93,11 @@ export default async function Home({
   searchParams: Promise<HomeFilters>;
 }) {
   const filters = await searchParams;
-  const categories = await getCategories();
-  const featuredProducts = await getFeaturedProducts();
-  const catalogProducts = await getCatalogProducts(filters);
   const t = await getTranslations();
+  const locale = await getLocale();
+  const categories = await getCategories(locale);
+  const featuredProducts = await getFeaturedProducts(locale);
+  const catalogProducts = await getCatalogProducts(filters, locale);
 
   return (
     <div className="bg-[#F8F4F3] text-[#1A1A1A]">

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import WishlistButton from "@/app/components/WishlistButton";
 import { getStrapiUrl } from "@/lib/auth";
 import { getProductPathFromProduct } from "@/lib/routes";
@@ -24,10 +24,10 @@ function toAbsoluteMediaUrl(url?: string) {
   return `${getStrapiUrl()}${url}`;
 }
 
-async function getCategories() {
+async function getCategories(locale: string) {
   try {
     const res = await fetchAPI("/categories", {
-      params: { sort: "order:asc" },
+      params: { sort: "order:asc" }, locale,
     });
     return res as StrapiResponse<Category>;
   } catch {
@@ -35,7 +35,7 @@ async function getCategories() {
   }
 }
 
-async function getCatalogProducts(filters: CatalogFilters) {
+async function getCatalogProducts(filters: CatalogFilters, locale: string) {
   try {
     const params: Record<string, string> = {
       "pagination[limit]": "60",
@@ -66,7 +66,7 @@ async function getCatalogProducts(filters: CatalogFilters) {
         break;
     }
 
-    const res = await fetchAPI("/products", { params });
+    const res = await fetchAPI("/products", { params, locale });
     const data = res as StrapiResponse<Product>;
     return data as StrapiResponse<Product>;
   } catch {
@@ -80,9 +80,10 @@ export default async function SearchPage({
   searchParams: Promise<CatalogFilters>;
 }) {
   const filters = await searchParams;
-  const categories = await getCategories();
-  const products = await getCatalogProducts(filters);
   const t = await getTranslations();
+  const locale = await getLocale();
+  const categories = await getCategories(locale);
+  const products = await getCatalogProducts(filters, locale);
 
   return (
     <div className="bg-[#F8F4F3] text-[#1A1A1A]">

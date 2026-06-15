@@ -2,12 +2,12 @@ import { fetchAPI, StrapiResponse, Category, Product } from "@/lib/strapi";
 import { getProductPath } from "@/lib/routes";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 
-async function getCategory(slug: string) {
+async function getCategory(slug: string, locale: string) {
   try {
     const res = await fetchAPI("/categories", {
-      params: { "filters[slug][$eq]": slug },
+      params: { "filters[slug][$eq]": slug }, locale,
     });
     const data = res as StrapiResponse<Category>;
     return data.data[0] || null;
@@ -16,14 +16,14 @@ async function getCategory(slug: string) {
   }
 }
 
-async function getProductsByCategory(categorySlug: string) {
+async function getProductsByCategory(categorySlug: string, locale: string) {
   try {
     const res = await fetchAPI("/products", {
       params: {
         "filters[category][slug][$eq]": categorySlug,
         "pagination[pageSize]": "50",
         sort: "title:asc",
-      },
+      }, locale,
     });
     return res as StrapiResponse<Product>;
   } catch {
@@ -37,14 +37,15 @@ export default async function CategoryPage({
   params: Promise<{ categorySlug: string }>;
 }) {
   const { categorySlug } = await params;
-  const category = await getCategory(categorySlug);
   const t = await getTranslations();
+  const locale = await getLocale();
+  const category = await getCategory(categorySlug, locale);
 
   if (!category) {
     notFound();
   }
 
-  const products = await getProductsByCategory(categorySlug);
+  const products = await getProductsByCategory(categorySlug, locale);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

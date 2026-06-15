@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import AddToCartButton from "@/app/product/[slug]/AddToCartButton";
 import WishlistButton from "@/app/components/WishlistButton";
 import ProductRow from "@/app/components/ProductRow";
@@ -10,7 +10,7 @@ import { getCategoryPath } from "@/lib/routes";
 import { fetchAPI, Product, StrapiResponse } from "@/lib/strapi";
 import ProductGallery from "./ProductGallery";
 
-async function getProduct(categorySlug: string, productSlug: string) {
+async function getProduct(categorySlug: string, productSlug: string, locale: string) {
   try {
     const res = await fetchAPI("/products", {
       params: {
@@ -18,7 +18,7 @@ async function getProduct(categorySlug: string, productSlug: string) {
         "filters[category][slug][$eq]": categorySlug,
         "populate[0]": "category",
         "populate[1]": "images",
-      },
+      }, locale,
     });
 
     const data = res as StrapiResponse<Product>;
@@ -28,7 +28,7 @@ async function getProduct(categorySlug: string, productSlug: string) {
   }
 }
 
-async function getRelatedProducts(categorySlug: string, excludeSlug: string) {
+async function getRelatedProducts(categorySlug: string, excludeSlug: string, locale: string) {
   try {
     const res = await fetchAPI("/products", {
       params: {
@@ -37,7 +37,7 @@ async function getRelatedProducts(categorySlug: string, excludeSlug: string) {
         "pagination[limit]": "10",
         "populate[0]": "category",
         "populate[1]": "images",
-      },
+      }, locale,
     });
 
     return res as StrapiResponse<Product>;
@@ -52,9 +52,10 @@ export default async function ProductPage({
   params: Promise<{ categorySlug: string; productSlug: string }>;
 }) {
   const { categorySlug, productSlug } = await params;
-  const product = await getProduct(categorySlug, productSlug);
-  const relatedProducts = await getRelatedProducts(categorySlug, productSlug);
   const t = await getTranslations();
+  const locale = await getLocale();
+  const product = await getProduct(categorySlug, productSlug, locale);
+  const relatedProducts = await getRelatedProducts(categorySlug, productSlug, locale);
 
   if (!product) {
     notFound();
