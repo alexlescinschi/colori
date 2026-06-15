@@ -1,7 +1,7 @@
 import { Link } from "@/i18n/navigation";
 import { redirect } from "next/navigation";
 import { notFound } from "next/navigation";
-import { getTranslations, getLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import AddToCartButton from "@/app/product/[slug]/AddToCartButton";
 import WishlistButton from "@/app/components/WishlistButton";
 import ProductRow from "@/app/components/ProductRow";
@@ -58,22 +58,8 @@ export default async function ProductPage({
   const relatedProducts = await getRelatedProducts(categorySlug, productSlug, locale);
 
   if (!product) {
-    // Fallback: try to find in default locale (en) then redirect to localized slug
-    const defaultProduct = await getProduct(categorySlug, productSlug, "en");
-    if (defaultProduct) {
-      const localizedRes = await fetchAPI("/products", {
-        locale,
-        params: {
-          "filters[documentId][$eq]": defaultProduct.documentId,
-          "populate[0]": "category",
-        },
-      }) as StrapiResponse<Product>;
-      if (localizedRes.data[0]) {
-        const p = localizedRes.data[0];
-        redirect(`/${locale}/${p.category?.slug || categorySlug}/${p.slug}`);
-      }
-    }
-    notFound();
+    // Slug doesn't exist in this locale, redirect to homepage
+    redirect(`/${locale}`);
   }
 
   const inStock = product.stockQuantity > 0;

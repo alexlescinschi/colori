@@ -42,18 +42,7 @@ export default async function CategoryPage({
   const category = await getCategory(categorySlug, locale);
 
   if (!category) {
-    // Fallback: try EN then redirect
-    const defaultCat = await getCategory(categorySlug, "en");
-    if (defaultCat) {
-      const localizedRes = await fetchAPI("/categories", {
-        locale,
-        params: { "filters[documentId][$eq]": defaultCat.documentId },
-      }) as StrapiResponse<Category>;
-      if (localizedRes.data[0]) {
-        redirect(`/${locale}/${localizedRes.data[0].slug}`);
-      }
-    }
-    notFound();
+    redirect(`/${locale}`);
   }
 
   const products = await getProductsByCategory(categorySlug, locale);
